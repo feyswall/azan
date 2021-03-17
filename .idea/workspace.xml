@@ -147,7 +147,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1615965109031</updated>
-      <workItem from="1615965112602" duration="1964000" />
+      <workItem from="1615965112602" duration="4746000" />
     </task>
     <servers />
   </component>
@@ -155,6 +155,10 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="447" y="166" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1615970725566">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="447" y="166" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1615970725566" />
     <state width="1286" height="163" key="GridCell.Tab.0.bottom" timestamp="1615965425193">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
