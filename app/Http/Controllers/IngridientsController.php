@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Ingridient;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class IngridientsController extends Controller
@@ -14,7 +15,19 @@ class IngridientsController extends Controller
      */
     public function index()
     {
-        return view('ingridient.ingridientIndex');
+        $datas = Ingridient::select("*")
+            ->where("id", ">", "-2")
+            ->orderBy("id", 'desc')
+            ->get();
+        return view('ingridient.ingridientIndex')->with('datas', $datas );
+    }
+
+    public function ajaxIndex(){
+        $datas = Ingridient::select("*")
+            ->where("id", ">", "-2")
+            ->orderBy("id", 'desc')
+            ->get();
+        return response()->json( $datas );
     }
 
     /**
@@ -35,7 +48,22 @@ class IngridientsController extends Controller
      */
     public function store(Request $request)
     {
-        dd('store method archieved');
+        $rules = array(
+            'ingridient_name' => ['required', 'string', 'max:100', 'min:4','unique:ingridients'],
+        );
+
+        $error = Validator::make($request->all(), $rules);
+
+        if ($error->fails()) {
+            return response()->json(['error' => $error->errors()->all()]);
+        }else {
+            $flight = Ingridient::create([
+                'ingridient_name' => $request->ingridient_name,
+            ]);
+            $data = Ingridient::all();
+            return response()->json(['success' => 'created successfully', 'data' => $data  ]);
+        }
+
     }
 
     /**

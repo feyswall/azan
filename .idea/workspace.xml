@@ -3,7 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="590c2bfd-48d8-4adb-8886-17eb4883c329" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/IngridientsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/IngridientsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Ingridient.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Ingridient.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/components/head.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/head.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/components/models/add-ingridient.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/models/add-ingridient.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/ingridient/ingridientIndex.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/ingridient/ingridientIndex.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,6 +163,8 @@
       <workItem from="1615965112602" duration="5359000" />
       <workItem from="1615985192613" duration="178000" />
       <workItem from="1615985503567" duration="4558000" />
+      <workItem from="1616314545020" duration="7338000" />
+      <workItem from="1616325272227" duration="4440000" />
     </task>
     <servers />
   </component>
@@ -188,9 +196,13 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1615985384159" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1615987043766">
+    <state x="339" y="162" key="run.anything.popup" timestamp="1616315086793">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1615987043766" />
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1616315086793" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1616325524823">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1616325524823" />
   </component>
 </project>

@@ -21,3 +21,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/ingridient', 'IngridientsController');
+
+//ajax routes
+Route::post('/ingridient/ajaxIndex', 'IngridientsController@ajaxIndex')->name('ingridient.ajaxIndex');

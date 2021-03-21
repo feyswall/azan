@@ -9,6 +9,8 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+
         <!-- Styles -->
         <style>
             html, body {
@@ -64,7 +66,7 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+        <div id="app" class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
@@ -96,5 +98,21 @@
                 </div>
             </div>
         </div>
+        <script>
+    new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue.js!'
+  },
+  created() {
+   
+  },
+  methods: {
+    allJavaFunctions: function () {
+            console.log('right here')
+    }
+  }
+})
+          </script>
     </body>
 </html>
