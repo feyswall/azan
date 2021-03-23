@@ -19,15 +19,30 @@ class IngridientsController extends Controller
             ->where("id", ">", "-2")
             ->orderBy("id", 'desc')
             ->get();
-        return view('ingridient.ingridientIndex')->with('datas', $datas );
+        return view('ingridient.ingridientIndex')
+            ->with('datas', $datas );
     }
 
-    public function ajaxIndex(){
-        $datas = Ingridient::select("*")
-            ->where("id", ">", "-2")
-            ->orderBy("id", 'desc')
-            ->get();
-        return response()->json( $datas );
+    public function updateAjax( Request $request ){
+        $rules = array(
+            'ingridient_name' => ['required', 'string', 'max:10', 'min:4','unique:ingridients'],
+        );
+        $error = Validator::make($request->all(), $rules);
+
+
+        if ($error->fails()) {
+            return response()->json(['error' => $error->errors()->all()]);
+        }else {
+            $ingr = Ingridient::find( $request->inId )->update(['ingridient_name' => $request->ingridient_name]);
+            if ( $ingr ) {
+                return response()->json(['success' => $ingr]);
+            }else{
+                return response()->json(['error' => $ingr]);
+            }
+            $data = Ingridient::all();
+            return response()->json(['success' => 'created successfully', 'data' => $data  ]);
+        }
+
     }
 
     /**

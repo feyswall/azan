@@ -20,7 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('/ingridient', 'IngridientsController');
+Route::resource('/ingridient', 'IngridientsController', ['except' => ['update', 'delete']]);
 
 //ajax routes
-Route::post('/ingridient/ajaxIndex', 'IngridientsController@ajaxIndex')->name('ingridient.ajaxIndex');
+Route::post('/ingridient/{id}', 'IngridientsController@updateAjax')->name('ingridient.updateAjax');
