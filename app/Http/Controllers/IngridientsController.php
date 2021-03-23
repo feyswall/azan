@@ -23,6 +23,19 @@ class IngridientsController extends Controller
             ->with('datas', $datas );
     }
 
+
+    public function deleteAjax( Request $request ){
+        $query = Ingridient::find( $request-> id )->delete();
+        if ( $query ){
+            $out = response()->json(['success' => 'succeed in that' ]);
+        }else{
+            $out =  response()->json(['fail' => 'something just isnt right']);
+        }
+        return $out;
+    }
+
+
+
     public function updateAjax( Request $request ){
         $rules = array(
             'ingridient_name' => ['required', 'string', 'max:10', 'min:4','unique:ingridients'],

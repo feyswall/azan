@@ -27,6 +27,9 @@
     <list default="true" id="590c2bfd-48d8-4adb-8886-17eb4883c329" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/IngridientsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/IngridientsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/customecss/loaders.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/customecss/loaders.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/customejs/ingridient/edit-ingridient.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/customejs/ingridient/edit-ingridient.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/components/models/edit-ingridient.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/models/edit-ingridient.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/ingridient/ingridientIndex.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/ingridient/ingridientIndex.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
@@ -194,7 +197,9 @@
       <workItem from="1616325272227" duration="4923000" />
       <workItem from="1616335045753" duration="3909000" />
       <workItem from="1616443252718" duration="11589000" />
-      <workItem from="1616479423916" duration="14917000" />
+      <workItem from="1616479423916" duration="15650000" />
+      <workItem from="1616498752656" duration="6567000" />
+      <workItem from="1616507805609" duration="5832000" />
     </task>
     <servers />
   </component>
@@ -242,9 +247,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1616482202031" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1616485566627">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1616510790844">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1616485566627" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1616510790844" />
   </component>
 </project>

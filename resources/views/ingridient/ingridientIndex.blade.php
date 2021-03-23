@@ -66,16 +66,16 @@ input.error {
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach( $datas as $data )
+                                            @for( $b=0; $b < $datas->count(); $b++ )
                                             <tr>
-                                                <td>{{ $data->id }}</td>
-                                                <td>{{ $data->ingridient_name }}</td>
+                                                <td>{{ $datas[$b]->id }}</td>
+                                                <td>{{ $datas[$b]->ingridient_name }}</td>
                                                 <td>
-                                                    <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editIngridientModel-{{ $data->id }}">Edit</a>
-                                                    <a class="btn btn-sm btn-danger">Delete</a>
+                                                    <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editIngridientModel-{{ $b }}">Edit</a>
+                                                    <button num="{{ $datas[$b]->id }}" id="deleteIngridientButton-{{ $b }}" class="btn btn-sm btn-danger">Delete</button>
                                                 </td>
                                             </tr>
-                                            @endforeach
+                                            @endfor
                                             <tfoot>
                                             <tr>
                                                 <td></td>
@@ -153,30 +153,46 @@ input.error {
 <!-- add ingrifient model -->
 <x-models.add-ingridient></x-models.add-ingridient>
 <!-- edit model -->
-    @foreach( $datas as $data )
-            <div class="modal fade" id="editIngridientModel-{{$data->id}}" tabindex="-1" role="dialog"
-                 aria-labelledby="editIngridientModalLabel-{{$data->id}}"
+@for( $b=0; $b < $datas->count(); $b++ )
+            <div class="modal fade" id="editIngridientModel-{{$b}}" tabindex="-1" role="dialog"
+                 aria-labelledby="editIngridientModalLabel-{{$b}}"
                  aria-hidden="true">
                 <div id="model-dialogue" class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="addIngridientModalLabel">Ready to Leave?</h5>
-                            <button id="model-btn-{{ $data->id }}" class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <button id="model-btn-{{ $datas[$b]->id }}" class="close" type="button" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>
                         </div>
-                        <div id="edit-ing-model-{{ $data->id }}" class="modal-body">
-                            <!-- component -->
-                            <div class="p-3">
-                                <form id="editIngridientForm-{{ $data->id }}">
-                                    <div class="form-group">
-                                        <label for="ingridient_name">ingridient name<span></span></label>
-                                        <input value="{{ $data->ingridient_name }}" name="ingridient_name" id="ingridient_name-{{$data->id}}" class="form-control" placeholder="Enter email">
-                                    <input type="hidden" value="{{ $data->id }}" name="ingrId">
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </form>
-                            </div>
+                        <div class="modal-body">
+                          <div id="edit-ing-model-{{$b}}" class="w-100" >
+                              <!-- component -->
+                              <div class="p-0 w-100">
+                                  <form id="editIngridientForm-{{ $b }}" class="w-100">
+                                      <div class="form-group">
+                                          <label for="ingridient_name">ingridient name<span></span></label>
+                                          <input value="{{ $datas[$b]->ingridient_name }}" name="ingridient_name" id="ingridient_name-{{$datas[$b]->id}}" class="form-control" placeholder="Enter email">
+                                          <input type="hidden" value="{{ $datas[$b]->id }}" name="ingrId">
+                                          <input type="hidden" value="{{ $b }}" name="formId">
+                                      </div>
+                                      <button type="submit" class="btn btn-primary">Submit</button>
+                                  </form>
+                              </div>
+                          </div>
+                              <div class="row justify-content-center">
+                                  <div class="col-md-12 col-sm-12">
+                                      <div id="edit-ing-loader-{{ $b }}" style="display: none " class="modal-body text-center">
+                                          <div class="loader1">
+                                              <span></span>
+                                              <span></span>
+                                              <span></span>
+                                              <span></span>
+                                              <span></span>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
                         </div>
                         <div class="modal-footer">
                         </div>
@@ -184,8 +200,42 @@ input.error {
                 </div>
             </div>
     </div>
-    @endforeach
-    <input value="{{ $datas->count() }}" id="allData">
+    @endfor
+    <!-- element counter very important -->
+    <input type="hidden" value="{{ $datas->count() }}" id="allData">
+<!-- default mode -->
+<!-- Button trigger modal -->
+<button id="defaultModelButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#defaultModel">
+    Launch demo modal
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="defaultModel" tabindex="-1" role="dialog" aria-labelledby="defaultModelLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header" style="visibility: hidden;">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button id="defaultModelClose" type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        <div class="modal-body pb-5 pt-5">
+            <div class="col-sm-12 col-md-12 text-center"><div class="loader1">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
 
 
     <!-- Bootstrap core JavaScript-->
@@ -221,6 +271,7 @@ input.error {
 
 <script src="{{ asset("customejs/ingridient/add-ingridient.js") }}"></script>
 <script src="{{ asset("customejs/ingridient/edit-ingridient.js") }}"></script>
+    <script src="{{ asset('customejs/ingridient/delete-ingridient.js') }}"></script>
         <script>
             $.ajaxSetup({
                 headers: {
@@ -243,6 +294,17 @@ input.error {
             //     }
             // });
         </script>
+<script>
+    console.log('start')
+    var allDataCountDelete = $('#allData').val();
+    console.log('moddle')
+    for ( var m=0; m < allDataCountDelete; m++ ){
+        console.log('almost  '+ m)
+        $('#deleteIngridientButton-'+m ).on('click', function (){
+              console.log('here we go again')
+        });
+    }
+</script>
     </body>
 </html>
 

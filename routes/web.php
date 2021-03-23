@@ -22,5 +22,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/ingridient', 'IngridientsController', ['except' => ['update', 'delete']]);
 
-//ajax routes
+//ajax routes for ingridients
 Route::post('/ingridient/{id}', 'IngridientsController@updateAjax')->name('ingridient.updateAjax');
+Route::post('/ingridient/delete/{id}', 'IngridientsController@deleteAjax')->name('ingridient.updateAjax');
+
