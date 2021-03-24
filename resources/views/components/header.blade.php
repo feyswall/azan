@@ -17,7 +17,7 @@
             <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="mr-2 text-gray-600 d-none d-lg-inline small">Douglas McGee</span>
+                    <span class="mr-2 text-gray-600 d-none d-lg-inline small">{{ auth()->user()->name }}</span>
                     <img class="img-profile rounded-circle"
                         src="{{ asset("assert/img/undraw_profile.svg") }}">
                 </a>
@@ -32,7 +32,7 @@
                         <i class="mr-2 text-gray-400 fas fa-cogs fa-sm fa-fw"></i>
                         Settings
                     </a>
-                    <a class="dropdown-item" href="{{ route('register') }}"">
+                    <a class="dropdown-item" data-toggle="modal" data-target="#addUser" style="cursor: pointer">
                         <i class="mr-2 text-gray-400 fas fa-plus fa-sm fa-fw"></i>
                         Add User
                     </a>

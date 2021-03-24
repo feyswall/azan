@@ -1,3 +1,4 @@
+@guest
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -44,7 +45,7 @@
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
-                           
+
                             @endif
                         @else
                             <li class="nav-item dropdown">
@@ -76,3 +77,4 @@
     </div>
 </body>
 </html>
+@endguest

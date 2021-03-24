@@ -152,6 +152,8 @@ input.error {
 <x-models.log-out></x-models.log-out>
 <!-- add ingrifient model -->
 <x-models.add-ingridient></x-models.add-ingridient>
+<!-- add user model -->
+<x--models.add-user></x--models.add-user>
 <!-- edit model -->
 @for( $b=0; $b < $datas->count(); $b++ )
             <div class="modal fade" id="editIngridientModel-{{$b}}" tabindex="-1" role="dialog"
@@ -272,6 +274,7 @@ input.error {
 <script src="{{ asset("customejs/ingridient/add-ingridient.js") }}"></script>
 <script src="{{ asset("customejs/ingridient/edit-ingridient.js") }}"></script>
     <script src="{{ asset('customejs/ingridient/delete-ingridient.js') }}"></script>
+    <script src="{{ asset('customejs/user/add-user.js') }}"></script>
         <script>
             $.ajaxSetup({
                 headers: {

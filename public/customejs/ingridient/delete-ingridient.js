@@ -36,13 +36,13 @@ function deleteIngridient(m){
     });
 
 }
-console.log('start')
+
 var allDataCountDelete = $('#allData').val();
 for ( var m=0; m < allDataCountDelete; m++ ){
-console.log('new-'+m)
+
     $('#deleteIngridientButton-'+m ).on( 'click', function ( event ){
           var idVal =  $( event.target ).attr('num');
-          console.log( idVal )
+    
 
 
           const swalWithBootstrapButtons = Swal.mixin({

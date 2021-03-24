@@ -84,13 +84,6 @@ $(document).ready(function() {
                                         $('#edit-ing-loader-'+formId).css('display', 'none');
                                         // $('#model-btn-'+inId).click();
                                         toastr.error( data.error );
-                                        $('#editIngridientForm-'+formId ).submit( function ( event ){
-                                            event.preventDefault();
-                                             formInputs = $('#editIngridientForm-'+formId).serializeArray();
-                                             ingr = formInputs[0].value
-                                             inId =  formInputs[1].value
-                                            tableReload(ingr, inId, formId);
-                                        });
 
                                     }else if ( data.success ) {
                                         $('#edit-ing-loader-'+formId).css('display', 'none');

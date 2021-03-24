@@ -24,7 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/ingridient', 'IngridientsController', ['except' => ['update', 'delete']])->middleware('can:edit-ingr');
 
 Route::namespace('Admin')->prefix('Admin')->name('admin')->group( function(){
-    Route::resource('/users', 'UsersController', ['except' => ['create', 'show', 'store']]);
+    Route::resource('/users', 'UsersController');
 } );
 
 //ajax routes for ingridients
