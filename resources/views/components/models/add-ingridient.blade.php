@@ -13,8 +13,8 @@ aria-hidden="true">
          <div class="p-3">
             <form method="POST" action="{{ route('ingridient.store') }}" id="addIngridientForm">
                 <div class="form-group">
-                    <label for="ingridient_name">Name <span></span></label>
-                  <input name="ingridient_name" id="ingridient_name" class="form-control" placeholder="Enter email">
+                    <label for="ingridient_name">Ingridient Name <span></span></label>
+                  <input name="ingridient_name" id="ingridient_name" class="form-control" placeholder="Enter Ingrident Name">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
               </form>

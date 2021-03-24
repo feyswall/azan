@@ -58,6 +58,10 @@ $(document).ready(function() {
                                     inId:inId,
                                     ingridient_name: ingridient_name
                                 },
+                                error: function( jqXHR, textStatus, errorThrown ){
+                                    alert( jqXHR.responseJSON.message )
+                                    setTimeout(function(){ location.reload(); }, 500);
+                                },
                                 success:function(data){
                                     toastr.options = {
                                         'closeButton': true,

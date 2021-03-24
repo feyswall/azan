@@ -36,6 +36,10 @@ $(document).ready(function() {
                     dataType : 'json',
                     url:"/ingridient",
                     data:{ ingridient_name:ingridient_name },
+                    error: function( jqXHR, textStatus, errorThrown ){
+                        alert( jqXHR.responseJSON.message )
+                        setTimeout(function(){ location.reload(); }, 500);
+                    },
                     success:function(data){
                         toastr.options = {
                             'closeButton': true,

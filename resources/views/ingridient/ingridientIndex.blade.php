@@ -172,7 +172,7 @@ input.error {
                                   <form id="editIngridientForm-{{ $b }}" class="w-100">
                                       <div class="form-group">
                                           <label for="ingridient_name">ingridient name<span></span></label>
-                                          <input value="{{ $datas[$b]->ingridient_name }}" name="ingridient_name" id="ingridient_name-{{$datas[$b]->id}}" class="form-control" placeholder="Enter email">
+                                          <input value="{{ $datas[$b]->ingridient_name }}" name="ingridient_name" id="ingridient_name-{{$datas[$b]->id}}" class="form-control" placeholder="Enter Ingridient Name">
                                           <input type="hidden" value="{{ $datas[$b]->id }}" name="ingrId">
                                           <input type="hidden" value="{{ $b }}" name="formId">
                                       </div>
@@ -182,7 +182,7 @@ input.error {
                           </div>
                               <div class="row justify-content-center">
                                   <div class="col-md-12 col-sm-12">
-                                      <div id="edit-ing-loader-{{ $b }}" style="display: none " class="modal-body text-center">
+                                      <div id="edit-ing-loader-{{ $b }}" style="display: none " class="text-center modal-body">
                                           <div class="loader1">
                                               <span></span>
                                               <span></span>
@@ -205,7 +205,7 @@ input.error {
     <input type="hidden" value="{{ $datas->count() }}" id="allData">
 <!-- default mode -->
 <!-- Button trigger modal -->
-<button id="defaultModelButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#defaultModel">
+<button style="display: none" id="defaultModelButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#defaultModel">
     Launch demo modal
   </button>
 
@@ -219,8 +219,8 @@ input.error {
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-        <div class="modal-body pb-5 pt-5">
-            <div class="col-sm-12 col-md-12 text-center"><div class="loader1">
+        <div class="pt-5 pb-5 modal-body">
+            <div class="text-center col-sm-12 col-md-12"><div class="loader1">
                 <span></span>
                 <span></span>
                 <span></span>

@@ -12,6 +12,12 @@ function deleteIngridient(m){
         url: '/ingridient/delete/'+ m,
         data: { id:m },
         dataType: 'json',
+        // statusCode: {
+        //     403: function() {
+        //       alert( "sorry You Dont have Access to this Page" );
+        //       setTimeout(function(){ location.reload(); }, 1000);
+        //     }
+        //   },
         success: function ( data ){
             $('#defaultModelClose').click()
             Swal.fire({
@@ -22,7 +28,11 @@ function deleteIngridient(m){
                 timer: 1500
             })
             setTimeout(function(){ location.reload(); }, 1000);
-        }
+        },
+        error: function( jqXHR, textStatus, errorThrown ){
+            alert( jqXHR.responseJSON.message )
+            setTimeout(function(){ location.reload(); }, 500);
+        },
     });
 
 }

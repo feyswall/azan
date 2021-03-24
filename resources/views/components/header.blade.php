@@ -32,9 +32,9 @@
                         <i class="mr-2 text-gray-400 fas fa-cogs fa-sm fa-fw"></i>
                         Settings
                     </a>
-                    <a class="dropdown-item" href="#">
-                        <i class="mr-2 text-gray-400 fas fa-list fa-sm fa-fw"></i>
-                        Activity Log
+                    <a class="dropdown-item" href="{{ route('register') }}"">
+                        <i class="mr-2 text-gray-400 fas fa-plus fa-sm fa-fw"></i>
+                        Add User
                     </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
