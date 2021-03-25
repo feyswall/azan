@@ -32,10 +32,13 @@
                         <i class="mr-2 text-gray-400 fas fa-cogs fa-sm fa-fw"></i>
                         Settings
                     </a>
+                    @can('register-user')
                     <a class="dropdown-item" data-toggle="modal" data-target="#addUser" style="cursor: pointer">
                         <i class="mr-2 text-gray-400 fas fa-plus fa-sm fa-fw"></i>
                         Add User
                     </a>
+                    @endcan
+
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                         <i class="mr-2 text-gray-400 fas fa-sign-out-alt fa-sm fa-fw"></i>

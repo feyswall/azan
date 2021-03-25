@@ -45,7 +45,6 @@ $(document).ready(function() {
                 $.ajax({
                     type:'POST',
                     beforeSend: function(){
-
                         $('#add-user-loader').css('display', 'block');
                         $('#add-user-model').css('display', 'none');
                         $('#regBtn').attr('disabled', true );
@@ -83,6 +82,8 @@ $(document).ready(function() {
                             $('#regBtn').attr('disabled', false );
 
                         }else if ( data.success ) {
+                            $("#addUserModelClose").click();
+                             $("#defaultModelButton").click();
                             Swal.fire({
                                 position: 'top-end',
                                 icon: 'success',

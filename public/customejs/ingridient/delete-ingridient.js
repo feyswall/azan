@@ -7,6 +7,7 @@ function deleteIngridient(m){
     $.ajax({
         method: 'POST',
         beforeSend: function(){
+          
            $("#defaultModelButton").click();
         },
         url: '/ingridient/delete/'+ m,
@@ -19,7 +20,7 @@ function deleteIngridient(m){
         //     }
         //   },
         success: function ( data ){
-            $('#defaultModelClose').click()
+           
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',

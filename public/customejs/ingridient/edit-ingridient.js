@@ -87,7 +87,8 @@ $(document).ready(function() {
 
                                     }else if ( data.success ) {
                                         $('#edit-ing-loader-'+formId).css('display', 'none');
-                                        $('#edit-ing-model-'+formId).css('display', 'block');
+                                        $("#model-btn-"+formId).click();
+                                      $("#defaultModelButton").click();
                                         Swal.fire({
                                             position: 'top-end',
                                             icon: 'success',

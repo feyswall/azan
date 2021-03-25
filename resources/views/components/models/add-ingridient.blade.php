@@ -4,7 +4,7 @@ aria-hidden="true">
     <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title" id="addIngridientModalLabel">Ready to Leave?</h5>
-            <button id="model-btn" class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <button id="model-btn-add" class="close" type="button" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">×</span>
             </button>
         </div>

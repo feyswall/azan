@@ -57,7 +57,7 @@ class UsersController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'role' => $request->role,
-                'password' => $request->password,
+                'password' =>Hash::make( $request->password ),
             ]);
 
             return response()->json(['success' => 'created successfully']);

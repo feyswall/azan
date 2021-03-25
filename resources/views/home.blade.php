@@ -1,37 +1,7 @@
-@auth
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<x-head></x-head>
-</head>
+@extends('layouts.my')
 
-<body id="page-top">
-
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-
-        <!-- Sidebar -->
-<x-side-bar>
-
-</x-side-bar>
-        <!-- End of Sidebar -->
-
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
-            <div id="content">
-
-                <!-- Topbar -->
-            <x-header>
-
-            </x-header>
-                <!-- End of Topbar -->
-
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-
-                    <!-- Page Heading -->
+@section('page-content')
+           <!-- Page Heading -->
                     <h3><b>Dashboard</b></h3>
 
                     <!-- cards of dashboard -->
@@ -121,30 +91,4 @@
                         </div>
                     </div>
                 <!-- /.container-fluid -->
-
-            </div>
-            <!-- End of Main Content -->
-
-        </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="rounded scroll-to-top" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-<x-models.log-out></x-models.log-out>
-
-
-    <!-- Bootstrap core JavaScript-->
-<x-down-script></x-down-script>
-
-</body>
-
-</html>
-
-@endauth
+@endsection

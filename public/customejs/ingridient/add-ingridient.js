@@ -76,6 +76,8 @@ $(document).ready(function() {
                                 tableReload();
                             });
                         }else if ( data.success ) {
+                            $('#model-btn-add').click();
+                            $("#defaultModelButton").click();
                             Swal.fire({
                                 position: 'top-end',
                                 icon: 'success',
