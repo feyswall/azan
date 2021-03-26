@@ -150,15 +150,30 @@
 <script src="{{ asset("customejs/ingridient/edit-ingridient.js") }}"></script>
 <script src="{{ asset('customejs/ingridient/delete-ingridient.js') }}"></script>
 <script>
-    console.log('start')
+    
     var allDataCountDelete = $('#allData').val();
-    console.log('moddle')
+
     for ( var m=0; m < allDataCountDelete; m++ ){
-        console.log('almost  '+ m)
+        
         $('#deleteIngridientButton-'+m ).on('click', function (){
               console.log('here we go again')
         });
     }
 </script>
+     <script>
+    $(document).ready(function() {
+        var startTable = function (){
+            $('#example').DataTable({
+                responsive: true,
+                autoWidth: true
+            });
+            $('#sider').DataTable({
+                responsive: true,
+                autoWidth: false
+            });
+        }
+        startTable();
+});
+         </script>
 @endsection
 

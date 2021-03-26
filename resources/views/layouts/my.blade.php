@@ -7,10 +7,14 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
 <!-- toast cdn -->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
+@yield('links')
+
 <!-- vue cdn -->
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
     <!-- sweet alert -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 <style>
     /* validator css */
     label.error {
@@ -90,21 +94,7 @@ input.error {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 <!-- toaster cdn -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-         <script>
-    $(document).ready(function() {
-        var startTable = function (){
-            $('#example').DataTable({
-                responsive: true,
-                autoWidth: true
-            });
-            $('#sider').DataTable({
-                responsive: true,
-                autoWidth: false
-            });
-        }
-        startTable();
-});
-         </script>
+
 @yield('customejs')
  <script src="{{ asset('customejs/user/add-user.js') }}"></script>
 </body>
