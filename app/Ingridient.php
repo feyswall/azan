@@ -11,4 +11,14 @@ class Ingridient extends Model
     ];
 
     protected $guarded = [];
+
+    /**
+     * The products that belong to the Ingridient
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
+    }
 }

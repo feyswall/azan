@@ -24,7 +24,7 @@ class UsersController extends Controller
     public function index(  )
     {
         $data = User::where('id', '!=', auth()->id())->get();
-        return view( 'manage-users')->with('datas', $data );
+        return view('manage-users')->with('datas', $data );
     }
 
     public function deleteAjax( Request $request ){
