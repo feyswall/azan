@@ -15,7 +15,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="{{ route('home') }}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -25,7 +25,7 @@
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            Interface
+            App Center
         </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
@@ -46,7 +46,7 @@
         @endcan
 
         <!-- Nav Item - Utilities Collapse Menu -->
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                 aria-expanded="true" aria-controls="collapseUtilities">
                 <i class="fas fa-fw fa-wrench"></i>
@@ -62,7 +62,7 @@
                     <a class="collapse-item" href="utilities-other.html">Other</a>
                 </div>
             </div>
-        </li>
+        </li> --}}
 
         <!-- Divider -->
         <hr class="sidebar-divider">
@@ -73,7 +73,7 @@
         </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item active">
+        {{-- <li class="nav-item active">
             <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
                 aria-controls="collapsePages">
                 <i class="fas fa-fw fa-folder"></i>
@@ -92,21 +92,23 @@
                     <a class="collapse-item" href="blank.html">Blank Page</a>
                 </div>
             </div>
-        </li>
+        </li> --}}
 
         <!-- Nav Item - Charts -->
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a class="nav-link" href="charts.html">
                 <i class="fas fa-fw fa-chart-area"></i>
                 <span>Charts</span></a>
-        </li>
+        </li> --}}
 
         <!-- Nav Item - Tables -->
+        @can('edit-user')
         <li class="nav-item">
             <a class="nav-link" href="{{ route('adminusers.index') }}">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Manage Users</span></a>
         </li>
+        @endcan
 
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">

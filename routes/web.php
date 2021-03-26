@@ -24,7 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/ingridient', 'IngridientsController', ['except' => ['update', 'delete']])->middleware('can:edit-ingr');
 
-Route::namespace('Admin')->prefix('Admin')->name('admin')->group( function(){
+Route::namespace('Admin')->prefix('Admin')->name('admin')->middleware('manage-users')->group( function(){
     Route::resource('/users', 'UsersController');
     Route::post('/user/delete/{id}', 'UsersController@deleteAjax')->name('userDeleteAjax');
     Route::post('/user/custome/{id}', 'UsersController@updateAjax')->name('userUpdateAjax');
