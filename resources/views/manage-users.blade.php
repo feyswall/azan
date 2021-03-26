@@ -34,7 +34,7 @@
                             <th>{{ $datas[$b]->created_at }}</th>
                             <td>
                                 <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editUserModel-{{ $b }}">Edit</a>
-                                <button num="{{ $datas[$b]->id }}"  class="btn btn-sm btn-default">view</button>
+                                <a href="{{ route('adminuser.info', $datas[$b]->id ) }}" num="{{ $datas[$b]->id }}"  class="btn btn-sm btn-default">view</a>
                                 <button num="{{ $datas[$b]->id }}" id="deleteUserButton-{{ $b }}" class="btn btn-sm btn-danger">Delete</button>
                             </td>
                         </tr>
@@ -140,7 +140,7 @@
                 <div class="mb-0 form-group row">
                     <div class="col-md-12 offset-md-4">
                         <button id="regBtn" type="submit" class="btn btn-primary">
-                            {{ __('Register') }}
+                            {{ __('update') }}
                         </button>
                     </div>
                 </div>

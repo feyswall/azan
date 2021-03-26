@@ -28,6 +28,7 @@ Route::namespace('Admin')->prefix('Admin')->name('admin')->group( function(){
     Route::resource('/users', 'UsersController');
     Route::post('/user/delete/{id}', 'UsersController@deleteAjax')->name('userDeleteAjax');
     Route::post('/user/custome/{id}', 'UsersController@updateAjax')->name('userUpdateAjax');
+    Route::get('/user/info/{id}', 'UsersController@userInfo')->name('user.info');
 } );
 
 //ajax routes for ingridients

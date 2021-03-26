@@ -15,22 +15,7 @@
     <!-- sweet alert -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-<style>
-    /* validator css */
-    label.error {
-    color: red;
-    font-size: 1rem;
-    display: block;
-    margin-top: 5px;
-}
-input.error {
-    border: 1px dashed red;
-    font-size: 1em;
-    color: red;
-    width: 100%;
-}
-</style>
-/* loader link */
+<link rel="stylesheet" type="text/css" href="{{ asset('customecss/all-time.css') }}">
  <link rel="stylesheet" type="text/css" href="{{ asset("customecss/loaders.css") }}">
 </head>
 

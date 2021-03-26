@@ -96,6 +96,13 @@ class UsersController extends Controller
     }
 
 
+
+public function userInfo($id){
+        $user = User::find($id);
+        return view('user-info')->with('user', $user);
+}
+
+
     /**
      * Show the form for creating a new resource.
      *
