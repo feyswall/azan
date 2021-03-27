@@ -7,7 +7,7 @@ function deleteUser(m){
     $.ajax({
         method: 'POST',
         beforeSend: function(){
-          
+
            $("#defaultModelButton").click();
         },
         url: '/Admin/user/delete/'+ m,
@@ -20,7 +20,6 @@ function deleteUser(m){
         //     }
         //   },
         success: function ( data ){
-           
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',

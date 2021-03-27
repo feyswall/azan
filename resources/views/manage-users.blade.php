@@ -46,7 +46,7 @@
                             <td></td>
                             <td>
                                <button class="btn btn-primary" data-toggle="modal" data-target="#addUser" style="cursor: pointer">
-                                   <i class="fa fa-plus">Add new user</i>
+                                   <i class="fas fa-user-plus"> Add new use</i>
                                </button>
                             </td>
                         </tr>

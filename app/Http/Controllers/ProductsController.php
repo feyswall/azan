@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Ingridient;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProductsController extends Controller
 {
@@ -15,9 +16,11 @@ class ProductsController extends Controller
      */
     public function index()
     {
+        $products = Product::all();
         $ingridients = Ingridient::all();
         return view('product.all-products')
-        ->with( 'ingridients', $ingridients );
+        ->with( 'products', $products )
+        ->with('ingridients', $ingridients);
     }
 
     /**
@@ -38,7 +41,21 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+                $rules = array(
+                    'product_name' => ['required', 'unique:products'],
+                    'product_cost' => ['required'],
+                    );
+            $error  =  Validator::make( $request->all(), $rules );
+            if ($error->fails()) {
+                return response()->json(['error' => $error->errors()->all()]);
+                    }else {
+                        $prod = Product::create([
+                            'product_name' => $request->product_name,
+                            'product_cost' => $request->product_cost,
+                        ]);
+                        $prod->ingridients()->sync( $request->ingr_arr );
+                return response()->json(['success' => 'data saved successfully']);
+                }
     }
 
     /**

@@ -30,6 +30,11 @@ Route::name('')->group( function(){
 });
 
 
+Route::name('')->group( function(){
+    Route::resource('/sales', 'SalesController');
+});
+
+
 Route::namespace('Admin')->prefix('Admin')->name('admin')->middleware('can:manage-users')->group( function(){
     Route::resource('/users', 'UsersController');
     Route::post('/user/delete/{id}', 'UsersController@deleteAjax')->name('userDeleteAjax');

@@ -5,7 +5,6 @@
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
             <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
             </div>
             <div class="mx-3 sidebar-brand-text">Azan Admin <sup>2</sup></div>
         </a>
@@ -16,7 +15,7 @@
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
             <a class="nav-link" href="{{ route('home') }}">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <i class="fas fa-columns"></i>
                 <span>Dashboard</span></a>
         </li>
 
@@ -33,7 +32,7 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                 aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-cog"></i>
+                <i class="fas fa-align-left"></i>
                 <span>Ingridients</span>
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -49,7 +48,7 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                 aria-expanded="true" aria-controls="collapseUtilities">
-                <i class="fas fa-fw fa-wrench"></i>
+                <i class="fas fa-clipboard-check"></i>
                 <span>product</span>
             </a>
             <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
@@ -57,6 +56,24 @@
                 <div class="py-2 bg-white rounded collapse-inner">
                     {{-- <h6 class="collapse-header">Custom Utilities:</h6> --}}
                     <a class="collapse-item" href="{{ route('product.index') }}">Backery</a>
+                </div>
+            </div>
+        </li>
+
+
+
+         <!-- Nav Item - Utilities Collapse Menu -->
+         <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSales"
+                aria-expanded="true" aria-controls="collapseSales">
+                <i class="fas fa-money-bill-wave"></i>
+                <span>Sales</span>
+            </a>
+            <div id="collapseSales" class="collapse" aria-labelledby="headingUtilities"
+                data-parent="#accordionSidebar">
+                <div class="py-2 bg-white rounded collapse-inner">
+                    {{-- <h6 class="collapse-header">Custom Utilities:</h6> --}}
+                    <a class="collapse-item" href="{{ route('sales.create') }}">Sell</a>
                 </div>
             </div>
         </li>
@@ -102,7 +119,7 @@
         @can('edit-user')
         <li class="nav-item">
             <a class="nav-link" href="{{ route('adminusers.index') }}">
-                <i class="fas fa-fw fa-table"></i>
+                <i class="fas fa-users"></i>
                 <span>Manage Users</span></a>
         </li>
         @endcan

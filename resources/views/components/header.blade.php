@@ -34,7 +34,7 @@
                     </a>
                     @can('register-user')
                     <a class="dropdown-item" data-toggle="modal" data-target="#addUser" style="cursor: pointer">
-                        <i class="mr-2 text-gray-400 fas fa-plus fa-sm fa-fw"></i>
+                        <i class="text-gray-400 fas fa-user-plus fa-sm fa-fw"></i>
                         Add User
                     </a>
                     @endcan

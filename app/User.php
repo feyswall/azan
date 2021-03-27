@@ -43,6 +43,16 @@ class User extends Authenticatable
         return $this->belongsToMany( Role::class );
     }
 
+    /**
+     * Get all of the sales for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function sales()
+    {
+        return $this->hasMany(Sale::class);
+    }
+
     public function hasAnyRole( $roles ){
         if( $this->roles()->whereIn('name', $roles)->first() ){
             return true;

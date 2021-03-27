@@ -26,6 +26,7 @@
                                                 </td>
                                             </tr>
                                             @endfor
+                                            </tbody>
                                             <tfoot>
                                             <tr>
                                                 <td></td>
@@ -150,11 +151,11 @@
 <script src="{{ asset("customejs/ingridient/edit-ingridient.js") }}"></script>
 <script src="{{ asset('customejs/ingridient/delete-ingridient.js') }}"></script>
 <script>
-    
+
     var allDataCountDelete = $('#allData').val();
 
     for ( var m=0; m < allDataCountDelete; m++ ){
-        
+
         $('#deleteIngridientButton-'+m ).on('click', function (){
               console.log('here we go again')
         });

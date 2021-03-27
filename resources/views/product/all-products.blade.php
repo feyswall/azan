@@ -7,32 +7,99 @@
 
 
 @section('page-content')
-<div class="mb-4 shadow  p-5">
+<p>
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#productAddSection" aria-expanded="false" aria-controls="productAddSection">
+    <i class="fas fa-plus"></i>
+    Add New Product
+  </button>
+</p>
+<div class="collapse" id="productAddSection">
+  <div class="card card-body">
+   <div class="row">
+      <div class="col-sm-12 col-md-12">
+          <div class="mb-4 shadow  p-5">
     <div class="row justify-content-start">
         <div class="col-md-8 col-sm-12">
-            <form method="" action="" class="product-form">
-                @csrf
+            <form id="add-product-form" action="{{ route('product.store') }}" method="POST" class="product-form">
+@csrf
 <input type="hidden" name="all_ingridients" value="{{ $ingridients }}">
 
+<div class="p-2 mb-2">
+    <label class="mb-0" for="product-name">Product Name</label>
+    <input class="form-control" id="product-name" name="product_name" required="required">
+</div>
+<div class="p-2 mb-2">
+    <label class="mb-0" for="cost">Product Cost</label>
+    <input class="form-control" id="product-cost" name="product_cost" required="required">
+</div>
 <div id="div-0" class="input_fields_wrap">
-    <button class="add_field_button btn btn-primary mb-2">Add More Fields</button>
        <div class="input-group">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="">First and last name</span>
-  </div>
-   <select  name="ingridient[]" class="custom-select" id="inputGroupSelect01">
+   <select  name="ingridient[]" class="custom-select" id="inputGroupSelect01" required="required">
     @foreach( $ingridients as $ingridient )
     <option value="{{ $ingridient->id }}">{{ $ingridient->ingridient_name }}</option>
     @endforeach
   </select>
-  <input name="amount[]" type="number" class="form-control">
+  <input name="amount[]" type="number" class="form-control" value="1">
 </div>
 </div>
+    <button class="add_field_button btn btn-primary mt-2">Add More Ingridient</button>
 <button class="btn btn-primary mt-2" type="submit">submit</button>
             </form>
         </div>
     </div>
 </div>
+      </div>
+  </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="col-md-8 col-sm-12 offset-2">
+    <div class="card-body">
+        <div class="card-body">
+            <table id="all-user-table" class="display" style="width:100%">
+                <thead>
+                <tr>
+                    <td>#</td>
+                    <th>product: Name</th>
+                    <th>Ingridients</th>
+                    <th>Cost</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                   @for( $b=0; $b < $products->count(); $b++ )
+             <tr>
+                      <td>{{ $b }}</td>
+                <td>{{ $products[$b]->product_name }} </td>
+                <td>
+                    <ul>
+                    @foreach( $products[$b]->ingridients->pluck('ingridient_name') as $name )
+                        <li>{{ $name }}</li>
+                    @endforeach
+                    </ul>
+                </td>
+                <td>{{ $products[$b]->product_cost }}</td>
+                   <td>
+            <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editIngridientModel-{{ $b }}">Edit</a>
+            <button num="{{ $products[$b]->id }}" id="deleteIngridientButton-{{ $b }}" class="btn btn-sm btn-danger">Delete</button>
+                    </td>
+            </tr>
+                    @endfor
+                <tfoot>
+               
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 @section('models')
@@ -45,8 +112,20 @@
 <script src="{{ asset('customejs/user/edit-user.js') }}"></script>
 
 <script>
+
+$(document).ready(function() {
+    $("#add-product-form").validate({
+        rules: {
+            product_name : {
+                required: true,
+            },
+        },
+    });
+});
+
+
   $(document).ready(function() {
-    var max_fields      = 10; //maximum input boxes allowed
+    var max_fields      = 100; //maximum input boxes allowed
     var wrapper         = $(".input_fields_wrap"); //Fields wrapper
     var add_button      = $(".add_field_button"); //Add button ID
     
@@ -66,14 +145,9 @@
                     return noding;
                }
             var html = '  <div id="div-'+x+'" class="input-group p-2"> '+
-            ' <div class="input-group-prepend"> '+
-            '  <span class="input-group-text" id="">First and last name</span>' +
-            ' </div>' +
             ' <select name="ingridient[]" class="custom-select" id="inputGroupSelect01">' +
-            optioning()
-    +
- ' </select>'+
- ' <input name="amount[]" type="number" class="form-control">'+
+            optioning()+' </select>'+
+ ' <input name="amount[]" type="number" class="form-control" required="required" value="1">'+
 '<a href="#" class="remove_field"> <i class="fas fa-times-circle fa-2x text-danger pl-2"></i></a> </div>';
             $(wrapper).append(html); //add input box
         }
@@ -85,30 +159,122 @@
     });
 
         $(".product-form").on("submit", function(e){ //user click on remove text
-        e.preventDefault(); 
+            e.preventDefault(); 
+const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: 'btn btn-success',
+    cancelButton: 'btn btn-danger'
+  },
+  buttonsStyling: false
+})
+
+swalWithBootstrapButtons.fire({
+  title: 'Are you sure?',
+  text: "The Data Will Be Saved!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonText: 'Yes, save it!',
+  cancelButtonText: 'No, cancel!',
+  reverseButtons: true
+}).then((result) => {
+  if (result.isConfirmed) {
       var input_groups = document.querySelectorAll('.input-group');
       var ingr = 0;
+      var ingr_arr = [];
       var amount = 0;
       var ingr_amount = [];
+      var product_name = $("input[name='product_name']").val();
+      var product_cost = $("input[name='product_cost']").val();
+
       for (var i = 0; i < input_groups.length ; i++) {
        ingr =  $(input_groups[i]).find( "select[name*='ingridient']" ).val(); 
        amount =   $(input_groups[i]).find( "input[name*='amount']" ).val();
        ingr_amount.push({'ingridient':ingr, 'amount':amount});
-      }
-        console.log( ingr_amount[0] )
+       ingr_arr.push(ingr);
+      } 
+             $.ajaxSetup({
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                    }
+                });
+
+                $.ajax({
+                    type:'POST',
+                        beforeSend: function(){
+                         $("#defaultModelButton").click();
+                    },
+                    dataType : 'json',
+                    url:"{{ route('product.store') }}",
+                    data:{
+                       ingr_amount:ingr_amount,
+                       product_name:product_name,
+                       ingr_arr:ingr_arr,
+                       product_cost : product_cost,
+                    },
+                    success: function ( data ){
+                         toastr.options = {
+                            'closeButton': true,
+                            'debug': false,
+                            'newestOnTop': false,
+                            'progressBar': false,
+                            'positionClass': 'toast-top-right',
+                            'preventDuplicates': false,
+                            'showDuration': '1000',
+                            'hideDuration': '1000',
+                            'timeOut': '5000',
+                            'extendedTimeOut': '1000',
+                            'showEasing': 'swing',
+                            'hideEasing': 'linear',
+                            'showMethod': 'fadeIn',
+                            'hideMethod': 'fadeOut',
+                        }
+                        if ( data.success ) {
+                              Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Your data has added',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                            setTimeout(function(){ location.reload(); }, 1000);
+                        }else if ( data.error ) {
+                            toastr.error( data.error[0] );
+                            $('#defaultModelClose').click();
+                        }else{
+                            $('#defaultModelClose').click();
+                              toastr.warning('Something just went wrong please Try again');
+                        }
+                    }
+                });
+
+  } else if (
+    /* Read more about handling dismissals below */
+    result.dismiss === Swal.DismissReason.cancel
+  ) {
+
+  }
+})
+
+
     });
+
+
+
+
+
+
 });
 </script>
 
      <script>
     $(document).ready(function() {
-        var manageUsersTable = function (){
-            $('#users-table').DataTable({
+        var all_products = function (){
+            $('#all-user-table').DataTable({
                 responsive: true,
                 autoWidth: true
             });
         }
-        manageUsersTable();
+        all_products();
 });
          </script>
 
