@@ -17,7 +17,7 @@
   <div class="card card-body">
    <div class="row">
       <div class="col-sm-12 col-md-12">
-          <div class="mb-4 shadow  p-5">
+          <div class="p-5 mb-4 shadow">
     <div class="row justify-content-start">
         <div class="col-md-8 col-sm-12">
             <form id="add-product-form" action="{{ route('product.store') }}" method="POST" class="product-form">
@@ -42,8 +42,8 @@
   <input name="amount[]" type="number" class="form-control" value="1">
 </div>
 </div>
-    <button class="add_field_button btn btn-primary mt-2">Add More Ingridient</button>
-<button class="btn btn-primary mt-2" type="submit">submit</button>
+    <button class="mt-2 add_field_button btn btn-primary">Add More Ingridient</button>
+<button class="mt-2 btn btn-primary" type="submit">submit</button>
             </form>
         </div>
     </div>
@@ -59,8 +59,8 @@
 
 
 
-
-<div class="col-md-8 col-sm-12 offset-2">
+ <div class="mb-4 shadow card">
+<div class="col-md-9 col-sm-12 offset-md-0 offset-sm-0">
     <div class="card-body">
         <div class="card-body">
             <table id="all-user-table" class="display" style="width:100%">
@@ -92,12 +92,14 @@
                     </td>
             </tr>
                     @endfor
+                </tbody>
                 <tfoot>
-               
+
                 </tfoot>
             </table>
         </div>
     </div>
+</div>
 </div>
 
 @endsection
@@ -128,7 +130,7 @@ $(document).ready(function() {
     var max_fields      = 100; //maximum input boxes allowed
     var wrapper         = $(".input_fields_wrap"); //Fields wrapper
     var add_button      = $(".add_field_button"); //Add button ID
-    
+
     var x = 1; //initlal text box count
     $(add_button).click(function(e){ //on add input button click
         e.preventDefault();
@@ -136,7 +138,7 @@ $(document).ready(function() {
          all_ingridients = JSON.parse(all_ingridients);
         if(x < max_fields){ //max input box allowed
             x++; //text box incremen
-            
+
                function optioning(){
                 var noding = '';
                  for ( var i = 0; i < all_ingridients.length; i++ ) {
@@ -144,22 +146,22 @@ $(document).ready(function() {
                     }
                     return noding;
                }
-            var html = '  <div id="div-'+x+'" class="input-group p-2"> '+
+            var html = '  <div id="div-'+x+'" class="p-2 input-group"> '+
             ' <select name="ingridient[]" class="custom-select" id="inputGroupSelect01">' +
             optioning()+' </select>'+
  ' <input name="amount[]" type="number" class="form-control" required="required" value="1">'+
-'<a href="#" class="remove_field"> <i class="fas fa-times-circle fa-2x text-danger pl-2"></i></a> </div>';
+'<a href="#" class="remove_field"> <i class="pl-2 fas fa-times-circle fa-2x text-danger"></i></a> </div>';
             $(wrapper).append(html); //add input box
         }
     });
-    
+
     $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
-        e.preventDefault(); 
+        e.preventDefault();
         $(this).parent('div').remove(); x--;
     });
 
         $(".product-form").on("submit", function(e){ //user click on remove text
-            e.preventDefault(); 
+            e.preventDefault();
 const swalWithBootstrapButtons = Swal.mixin({
   customClass: {
     confirmButton: 'btn btn-success',
@@ -187,11 +189,11 @@ swalWithBootstrapButtons.fire({
       var product_cost = $("input[name='product_cost']").val();
 
       for (var i = 0; i < input_groups.length ; i++) {
-       ingr =  $(input_groups[i]).find( "select[name*='ingridient']" ).val(); 
+       ingr =  $(input_groups[i]).find( "select[name*='ingridient']" ).val();
        amount =   $(input_groups[i]).find( "input[name*='amount']" ).val();
        ingr_amount.push({'ingridient':ingr, 'amount':amount});
        ingr_arr.push(ingr);
-      } 
+      }
              $.ajaxSetup({
                     headers: {
                         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
