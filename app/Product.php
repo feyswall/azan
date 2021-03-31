@@ -11,7 +11,6 @@ class Product extends Model
     protected $fillable = [
         'product_name',
         'product_cost',
-
     ];
 
     /**
@@ -31,6 +30,21 @@ class Product extends Model
      */
     public function sales()
     {
-        return $this->belongsToMany(Sale::class);
+        return $this->hasMany(Sale::class);
+    }
+
+    /**
+     * The stocks that belong to the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function stock()
+    {
+        return $this->hasOne(Stock::class);
+    }
+
+    public function stockTraces()
+    {
+        return $this->belongsToMany(Stock::class);
     }
 }

@@ -25,13 +25,21 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/ingridient', 'IngridientsController', ['except' => ['update', 'delete']])->middleware('can:edit-ingr');
 
 
-Route::name('')->group( function(){
+Route::name('')->middleware('can:manage-product')->group( function(){
     Route::resource('/product', 'ProductsController');
 });
 
 
 Route::name('')->group( function(){
     Route::resource('/sales', 'SalesController');
+});
+
+Route::name('')->group( function(){
+    Route::resource('/stock', 'StocksController');
+});
+
+Route::name('')->group( function(){
+    Route::resource('/damaged', 'DamagesController');
 });
 
 

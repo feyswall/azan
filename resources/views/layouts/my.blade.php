@@ -48,7 +48,6 @@
 
         </div>
         <!-- End of Content Wrapper -->
-
     </div>
     <!-- End of Page Wrapper -->
 
@@ -63,6 +62,8 @@
 <x-models.add-user></x-models.add-user>
 <!-- default mode -->
 <x-models.loader-model></x-models.loader-model>
+<!-- selling model -->
+<x-models.sell></x-models.sell>
 @yield('models')
 
 
@@ -82,6 +83,7 @@
 
 @yield('customejs')
  <script src="{{ asset('customejs/user/add-user.js') }}"></script>
+ <script src="{{ asset('customejs/product/sell.js') }}"></script>
 </body>
 
 </html>

@@ -17,7 +17,7 @@
   <div class="card card-body">
    <div class="row">
       <div class="col-sm-12 col-md-12">
-          <div class="p-5 mb-4 shadow">
+          <div class="p-5 mb-4 shadow border-left-success">
     <div class="row justify-content-start">
         <div class="col-md-8 col-sm-12">
             <form id="add-product-form" action="{{ route('product.store') }}" method="POST" class="product-form">
@@ -59,7 +59,7 @@
 
 
 
- <div class="mb-4 shadow card">
+ <div class="mb-4 shadow card border-left-primary">
 <div class="col-md-9 col-sm-12 offset-md-0 offset-sm-0">
     <div class="card-body">
         <div class="card-body">

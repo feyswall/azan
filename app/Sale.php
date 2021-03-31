@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sale extends Model
 {
-    protected $fillable = ['paid', 'total_amount','received_amount', 'remain_amount'];
+    protected $fillable = ['paid_money', 'total_amount','received_amount', 'remain_amount', 'remain_money', 'total_money', 'user_id', 'product_id', 'who_buys'];
     /**
      * Get the user that owns the Sale
      *
@@ -27,8 +27,8 @@ class Sale extends Model
  *
  * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
  */
-public function products()
+public function product()
 {
-    return $this->belongsToMany(Product::class);
+    return $this->belongsTo(Product::class);
 }
 }

@@ -45,6 +45,7 @@
         @endcan
 
         <!-- Nav Item - Utilities Collapse Menu -->
+        @can('manage-product')
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                 aria-expanded="true" aria-controls="collapseUtilities">
@@ -60,11 +61,13 @@
             </div>
         </li>
 
+        @endcan
+
 
 
          <!-- Nav Item - Utilities Collapse Menu -->
          <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSales"
+            <a id="sideSale" class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSales"
                 aria-expanded="true" aria-controls="collapseSales">
                 <i class="fas fa-money-bill-wave"></i>
                 <span>Sales</span>
@@ -73,8 +76,28 @@
                 data-parent="#accordionSidebar">
                 <div class="py-2 bg-white rounded collapse-inner">
                     {{-- <h6 class="collapse-header">Custom Utilities:</h6> --}}
-                    <a class="collapse-item" href="{{ route('sales.create') }}">Sell</a>
+                    <a class="collapse-item" id="selltModelButton" type="button" data-toggle="modal" data-target="#sellModel" >Sell Now</a>
+                    <a class="collapse-item" id="" href="{{ route('sales.index') }}" type="button" >All Sales</a>
                 </div>
+
+            </div>
+        </li>
+
+
+        <li class="nav-item">
+            <a id="sideStoke" class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStoke"
+                aria-expanded="true" aria-controls="collapseStoke">
+                <i class="fas fa-toolbox"></i>
+                <span>Stock</span>
+            </a>
+            <div id="collapseStoke" class="collapse" aria-labelledby="headingUtilities"
+                data-parent="#accordionSidebar">
+                <div class="py-2 bg-white rounded collapse-inner">
+                    <a class="collapse-item" id="" href="{{ route('stock.create') }}" type="button" >Add To Stock</a>
+                    <a class="collapse-item" id="" href="{{ route('stock.index') }}" type="button" >All in Stock</a>
+                    <a class="collapse-item" id="" href="{{ route('damaged.create') }}" type="button" >Damaged Goods</a>
+                </div>
+
             </div>
         </li>
 
