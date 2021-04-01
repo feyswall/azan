@@ -7,6 +7,9 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="card-body">
                                     <div class="card-body">
+                                      <div class="mb-3">
+                                        <h3>Ingridients List</h3>
+                                      </div>
                                         <table id="example" class="display" style="width:100%">
                                             <thead>
                                             <tr>

@@ -43,7 +43,7 @@ class ProductsController extends Controller
     {
                 $rules = array(
                     'product_name' => ['required', 'unique:products'],
-                    'product_cost' => ['required'],
+                    'product_cost' => ['required', 'integer', 'min:1'],
                     );
             $error  =  Validator::make( $request->all(), $rules );
             if ($error->fails()) {

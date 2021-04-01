@@ -38,7 +38,7 @@ class IngridientsController extends Controller
 
     public function updateAjax( Request $request ){
         $rules = array(
-            'ingridient_name' => ['required', 'string', 'max:10', 'min:4','unique:ingridients'],
+            'ingridient_name' => ['required', 'string', 'max:100', 'min:2','unique:ingridients'],
         );
         $error = Validator::make($request->all(), $rules);
 

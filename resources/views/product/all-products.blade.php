@@ -30,7 +30,7 @@
 </div>
 <div class="p-2 mb-2">
     <label class="mb-0" for="cost">Product Cost</label>
-    <input class="form-control" id="product-cost" name="product_cost" required="required">
+    <input type="number" class="form-control" id="product-cost" name="product_cost" required="required">
 </div>
 <div id="div-0" class="input_fields_wrap">
        <div class="input-group">
@@ -115,15 +115,18 @@
 
 <script>
 
-$(document).ready(function() {
-    $("#add-product-form").validate({
-        rules: {
-            product_name : {
-                required: true,
-            },
-        },
-    });
-});
+// $(document).ready(function() {
+//     $("#add-product-form").validate({
+//         rules: {
+//             product_name : {
+//                 required: true,
+//             },
+//         },
+//            submitHandler: function(g) {
+
+//            },
+//     });
+// });
 
 
   $(document).ready(function() {
