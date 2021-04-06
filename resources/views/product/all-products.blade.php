@@ -26,7 +26,7 @@
 
 <div class="p-2 mb-2">
     <label class="mb-0" for="product-name">Product Name</label>
-    <input class="form-control" id="product-name" name="product_name" required="required">
+    <input  class="form-control" id="product-name" name="product_name" required="required">
 </div>
 <div class="p-2 mb-2">
     <label class="mb-0" for="cost">Product Cost</label>
@@ -39,7 +39,7 @@
     <option value="{{ $ingridient->id }}">{{ $ingridient->ingridient_name }}</option>
     @endforeach
   </select>
-  <input name="amount[]" type="number" class="form-control" value="1">
+  <input name="amount[]" type="number" placeholder="weight in grams" class="form-control" value="1" required="required">
 </div>
 </div>
     <button class="mt-2 add_field_button btn btn-primary">Add More Ingridient</button>
@@ -152,7 +152,7 @@
             var html = '  <div id="div-'+x+'" class="p-2 input-group"> '+
             ' <select name="ingridient[]" class="custom-select" id="inputGroupSelect01">' +
             optioning()+' </select>'+
- ' <input name="amount[]" type="number" class="form-control" required="required" value="1">'+
+ ' <input placeholder="weight in grams" name="amount[]" type="number" class="form-control" required="required" value="1">'+
 '<a href="#" class="remove_field"> <i class="pl-2 fas fa-times-circle fa-2x text-danger"></i></a> </div>';
             $(wrapper).append(html); //add input box
         }
@@ -245,6 +245,8 @@ swalWithBootstrapButtons.fire({
                         }else if ( data.error ) {
                             toastr.error( data.error[0] );
                             $('#defaultModelClose').click();
+                        }else if ( data.test ) {
+                             console.log( data.test )
                         }else{
                             $('#defaultModelClose').click();
                               toastr.warning('Something just went wrong please Try again');

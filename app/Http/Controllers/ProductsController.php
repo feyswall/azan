@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Ingridient;
 use App\Product;
 use Illuminate\Http\Request;
+use App\IngridientAmount;
 use Illuminate\Support\Facades\Validator;
 
 class ProductsController extends Controller
@@ -44,6 +45,7 @@ class ProductsController extends Controller
                 $rules = array(
                     'product_name' => ['required', 'unique:products'],
                     'product_cost' => ['required', 'integer', 'min:1'],
+                  
                     );
             $error  =  Validator::make( $request->all(), $rules );
             if ($error->fails()) {
@@ -54,8 +56,19 @@ class ProductsController extends Controller
                             'product_cost' => $request->product_cost,
                         ]);
                         $prod->ingridients()->sync( $request->ingr_arr );
+        $word = $request->ingr_amount;
+            for ($g=0;  $g < count($word); $g++) {
+                 IngridientAmount::create([
+                    'ingridient_id' => $word[$g]['ingridient'],
+                    'product_id' => $prod->id,
+                    'amount' => $word[$g]['amount'],
+                 ]);
+            }
+
                 return response()->json(['success' => 'data saved successfully']);
                 }
+
+        
     }
 
     /**

@@ -85,8 +85,9 @@ swalWithBootstrapButtons.fire({
   } else if (
     /* Read more about handling dismissals below */
     result.dismiss === Swal.DismissReason.cancel
-  ) {
 
+  ) {
+    setTimeout(function(){ location.reload(); }, 500);
   }
 })
 

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -25,12 +28,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="590c2bfd-48d8-4adb-8886-17eb4883c329" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/sales/deleted_sales.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/IngridientsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/IngridientsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/customecss/loaders.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/customecss/loaders.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/customejs/ingridient/edit-ingridient.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/customejs/ingridient/edit-ingridient.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/components/models/edit-ingridient.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/models/edit-ingridient.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SalesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SalesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Sale.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Sale.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/customejs/product/sell.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/customejs/product/sell.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/components/models/edit-ingridient.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/components/models/sell.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/models/sell.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/components/side-bar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/side-bar.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/ingridient/ingridientIndex.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/ingridient/ingridientIndex.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/sales/all-sell.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/sales/all-sell.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -200,6 +208,7 @@
       <workItem from="1616479423916" duration="15650000" />
       <workItem from="1616498752656" duration="6567000" />
       <workItem from="1616507805609" duration="5832000" />
+      <workItem from="1617606549132" duration="10232000" />
     </task>
     <servers />
   </component>
@@ -247,9 +256,20 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1616482202031" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1616510790844">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1617615746271">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1616510790844" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1617615746271" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/resources/views/sales/deleted_sales.blade.php</url>
+          <line>44</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

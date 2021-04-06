@@ -4,7 +4,7 @@
 
   <div class="mb-4 shadow card">
                         <div class="row justify-content-start">
-                            <div class="col-md-6 col-sm-12">
+                            <div class="col-md-10 col-sm-12">
                                 <div class="card-body">
                                     <div class="card-body">
                                       <div class="mb-3">
@@ -45,7 +45,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-sm-12">
+                            {{-- <div class="col-md-6 col-sm-12">
                                 <div class="card-body">
                                     <div class="card-body">
                                         <div class="table-responsive">
@@ -84,7 +84,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                         </div>
                     </div>

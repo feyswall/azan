@@ -32,6 +32,10 @@ Route::name('')->middleware('can:manage-product')->group( function(){
 
 Route::name('')->group( function(){
     Route::resource('/sales', 'SalesController');
+    Route::post('/sales/custome/{id}', 'SalesController@salesUpdateAjax' )->name('sales.custome');
+    Route::post('/sales/custome/del/{id}', 'SalesController@salesDeleteAjax' )->name('sales.custome.del');
+    Route::get('/sales/custome/deleted', 'SalesController@deletedSales')->name('sales.deleted');
+    Route::post('/sales/custome/delete/fromto', 'SalesController@deletedFromToSales' )->name('sales.delete.fromto');
 });
 
 Route::name('')->group( function(){
@@ -48,7 +52,10 @@ Route::namespace('Admin')->prefix('Admin')->name('admin')->middleware('can:manag
     Route::post('/user/delete/{id}', 'UsersController@deleteAjax')->name('userDeleteAjax');
     Route::post('/user/custome/{id}', 'UsersController@updateAjax')->name('userUpdateAjax');
     Route::get('/user/info/{id}', 'UsersController@userInfo')->name('user.info');
-} );
+});
+// Normal user 'user routes'
+ Route::get('/user/profile', 'HomeController@userProfile')->name('user.profile');
+
 
 //ajax routes for ingridients
 Route::name('ingridient')->middleware('can:edit-ingr')->group( function(){

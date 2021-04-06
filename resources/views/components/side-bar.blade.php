@@ -67,6 +67,7 @@
 
          <!-- Nav Item - Utilities Collapse Menu -->
          <li class="nav-item">
+
             <a id="sideSale" class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSales"
                 aria-expanded="true" aria-controls="collapseSales">
                 <i class="fas fa-money-bill-wave"></i>
@@ -78,6 +79,9 @@
                     {{-- <h6 class="collapse-header">Custom Utilities:</h6> --}}
                     <a class="collapse-item" id="selltModelButton" type="button" data-toggle="modal" data-target="#sellModel" >Sell Now</a>
                     <a class="collapse-item" id="" href="{{ route('sales.index') }}" type="button" >All Sales</a>
+                     @can('manage-sale')
+                    <a class="collapse-item" id="" href="{{ route('sales.deleted') }}" type="button" >deleted sales</a>
+                    @endcan
                 </div>
 
             </div>
@@ -93,7 +97,9 @@
             <div id="collapseStoke" class="collapse" aria-labelledby="headingUtilities"
                 data-parent="#accordionSidebar">
                 <div class="py-2 bg-white rounded collapse-inner">
+ @can('manage-product')
                     <a class="collapse-item" id="" href="{{ route('stock.create') }}" type="button" >Add To Stock</a>
+                    @endcan
                     <a class="collapse-item" id="" href="{{ route('stock.index') }}" type="button" >All in Stock</a>
                     <a class="collapse-item" id="" href="{{ route('damaged.create') }}" type="button" >Damaged Goods</a>
                 </div>

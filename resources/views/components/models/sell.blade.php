@@ -16,6 +16,7 @@
     <div class="row justify-content-start">
       <div class="col-md-7">
               <form class="p-5 user" id="sell-product-form">
+                <h3>Sell Product</h3>
                 <div class="form-group">
                   <label for="product"></label>
                     <select name="product" class="form-control" required>
@@ -45,7 +46,7 @@
                 <hr>
             </form>
       </div>
-      <div class="col-md-4 mt-3">
+      <div class="mt-3 col-md-4">
         <h4>Your Stock Balance</h4>
         <ul>
           @foreach( App\Stock::all() as $stock )
