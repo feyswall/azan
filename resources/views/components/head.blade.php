@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Blank</title>
+  <link rel="shortcut icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-BWBUbQUtpfSD3C7tgy3VK6875LZgpmqOIg&usqp=CAU" type="image/x-icon">
     <!-- Custom fonts for this template-->
     <link href="{{ asset('assert/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
