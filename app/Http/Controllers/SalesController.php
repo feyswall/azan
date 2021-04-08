@@ -283,7 +283,7 @@ $sellone = Sale::where('id', $request->sellId )->first();
 if( $prev_data == null ){
     return response()->json(['error' => 'stock has no product of this type' ]);
 }else{
-    if ($prev_data->amount <= $received ) {
+    if (($prev_data->amount + $sellone->total_amount) <= $received ) {
         return response()->json(['error' => 'stock has '.$prev_data->amount.' only' ]);
     }else{
 
