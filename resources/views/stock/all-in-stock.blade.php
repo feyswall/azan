@@ -58,7 +58,6 @@
                     <td>#</td>
                     <th>product</th>
                     <th>Amount</th>
-                    <th>User</th>
                     <th>created_at</th>
                     
                 </tr>
@@ -75,12 +74,7 @@
                          @endphp
                      </td>
                 <td>{{ $stockHist[$b]->amount }}</td>
-                                <td>
-                    @php
-  $user = App\User::find( $stockHist[$b]->user_id );
-                        echo $user->name;
-                  @endphp
-                </td>
+      
                 <td>{{ $stockHist[$b]->created_at }}</td>
             </tr>
                     @endfor

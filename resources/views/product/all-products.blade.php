@@ -29,7 +29,7 @@
     <input  class="form-control" id="product-name" name="product_name" required="required">
 </div>
 <div class="p-2 mb-2">
-    <label class="mb-0" for="cost">Product Cost</label>
+    <label class="mb-0" for="cost">Product Cost (per - unit)</label>
     <input type="number" class="form-control" id="product-cost" name="product_cost" required="required">
 </div>
 <div id="div-0" class="input_fields_wrap">
