@@ -29,7 +29,7 @@ class SalesController extends Controller
     public function conv_pdf( $sales ){
 
 $html_table = '
-<h2 style="text-align: center;">Sales information </h2>
+<h2 style="text-align: center; font-family: sans-serif;">Sales information </h2>
 <table style="border: 1px solid black;
   border-collapse: collapse; width: 100%;">
   <tr>
@@ -371,7 +371,7 @@ if( $prev_data == null ){
                return redirect()->route('sales.index');
               }else{
                    $datas = Sale::where('created_at', '>=', date('Y-m-d h:i:s', strtotime($request->from_date)) )
-        ->where( 'created_at', '<=', date('Y-m-d h:i:s', strtotime($request->to_date)) )->get();
+        ->where( 'created_at', '<=', date('Y-m-d h:i:s', strtotime($request->to_date)) )->orderBy('id', 'desc')->get();
 
                     return $this->conv_pdf( $datas );
               }
