@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Sale;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -26,7 +29,37 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+// get today - 2015-12-19 00:00:00
+$today = Carbon::today();
+
+// get yesterday - 2015-12-18 00:00:00
+$yesterday = Carbon::yesterday();
+
+// get tomorrow - 2015-12-20 00:00:00
+$tomorrow = Carbon::tomorrow();
+
+$dy  = date('y-m-d', strtotime("yesterday"));
+
+
+// Money query from yesterday
+$yesterday_total_sales = Sale::where('created_at', '>=', $yesterday)->pluck('total_money')->sum();
+$yesterday_paid_sales = Sale::where('created_at', '>=', $yesterday)->pluck('paid_money')->sum();
+$yesterday_remain_sales = Sale::where('created_at', '>=', $yesterday)->pluck('remain_money')->sum();
+
+// product query from yesterday
+$yesterday_total_products = Sale::where('created_at', '>=', $yesterday)->pluck('total_amount')->sum();
+$yesterday_paid_products = Sale::where('created_at', '>=', $yesterday)->pluck('received_amount')->sum();
+$yesterday_remain_products = Sale::where('created_at', '>=', $yesterday)->pluck('remain_amount')->sum();
+      // $sales = Sale::where('created_at', '<=', $today)->where('created_at', '>=', $yesterday)->get();
+return view('home')
+->with('yesterday_total_sales', $yesterday_total_sales)
+->with('yesterday_remain_sales', $yesterday_remain_sales)
+->with('yesterday_paid_sales', $yesterday_paid_sales)
+
+->with('yesterday_total_products', $yesterday_total_products)
+->with('yesterday_remain_products', $yesterday_remain_products)
+->with('yesterday_paid_products', $yesterday_paid_products);
     }
 
     public function userProfile(){

@@ -29,7 +29,7 @@ class SalesController extends Controller
     public function conv_pdf( $sales ){
 
 $html_table = '
-<h2 style="text-align: center; font-family: sans-serif;">Sales information </h2>
+<h2 style="text-align: center; font-family: Hoefler Text;">Sales information </h2>
 <table style="border: 1px solid black;
   border-collapse: collapse; width: 100%;">
   <tr>

@@ -14,8 +14,9 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="mr-2 col">
                                             <div class="mb-1 text-xs font-weight-bold text-primary text-uppercase">
-                                                Earnings (Monthly)</div>
-                                            <div class="mb-0 text-gray-800 h5 font-weight-bold">$40,000</div>
+                                                Yeasterday Total</div>
+                                            <div class="mb-0 text-gray-800 h5 font-weight-bold">{{ $yesterday_total_sales }}/= Tsh</div>
+                                            <p><small><b>{{  $yesterday_total_products }}</b> units</small></p>
                                         </div>
                                         <div class="col-auto">
                                             <i class="text-gray-300 fas fa-calendar fa-2x"></i>
@@ -32,40 +33,12 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="mr-2 col">
                                             <div class="mb-1 text-xs font-weight-bold text-success text-uppercase">
-                                                Earnings (Annual)</div>
-                                            <div class="mb-0 text-gray-800 h5 font-weight-bold">$215,000</div>
+                                                Yesterday Paid</div>
+                                            <div class="mb-0 text-gray-800 h5 font-weight-bold">{{ $yesterday_paid_sales }}/= Tsh</div>
+                                             <p><small><b>{{  $yesterday_paid_products }}</b> units</small></p>
                                         </div>
                                         <div class="col-auto">
                                             <i class="text-gray-300 fas fa-dollar-sign fa-2x"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Tasks Card Example -->
-                        <div class="mb-4 col-xl-3 col-md-6">
-                            <div class="py-2 shadow card border-left-info h-100">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="mr-2 col">
-                                            <div class="mb-1 text-xs font-weight-bold text-info text-uppercase">Tasks
-                                            </div>
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="mb-0 mr-3 text-gray-800 h5 font-weight-bold">50%</div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="mr-2 progress progress-sm">
-                                                        <div class="progress-bar bg-info" role="progressbar"
-                                                            style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                                                            aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="text-gray-300 fas fa-clipboard-list fa-2x"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -79,8 +52,10 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="mr-2 col">
                                             <div class="mb-1 text-xs font-weight-bold text-warning text-uppercase">
-                                                Pending Requests</div>
-                                            <div class="mb-0 text-gray-800 h5 font-weight-bold">18</div>
+                                                Yesterday Debts</div>
+                                            <div class="mb-0 text-gray-800 h5 font-weight-bold">
+                                            {{ $yesterday_remain_sales }}/= Tsh</div>
+                                             <p><small><b>{{  $yesterday_remain_products }}</b> units</small></p>
                                         </div>
                                         <div class="col-auto">
                                             <i class="text-gray-300 fas fa-comments fa-2x"></i>
@@ -89,6 +64,30 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Pending Requests Card Example -->
+                        <div class="mb-4 col-xl-3 col-md-6">
+                            <div class="py-2 shadow card border-left-warning h-100">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="mr-2 col">
+        <div class="mb-1 text-xs font-weight-bold text-warning text-uppercase">Product  ( Paid/Total )</div>
+                                            <div class="mb-0 text-gray-800 h5 font-weight-bold">
+                                             <div class="progress md-progress" style="height: 20px">
+  <div class="progress-bar" role="progressbar" style="width: {{ $yesterday_paid_products  }}%; height: 20px" aria-valuenow="{{ $yesterday_paid_products }}" aria-valuemin="0" aria-valuemax="{{ $yesterday_total_products }}">{{ 
+        round( ($yesterday_paid_products/ $yesterday_total_products ) * 100) }}%</div>
+</div>
+                                        </div>
+                
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
                     </div>
                 <!-- /.container-fluid -->
 @endsection
