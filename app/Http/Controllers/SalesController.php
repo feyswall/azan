@@ -10,6 +10,7 @@ use Dotenv\Result\Success;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Carbon;
+use PDF;
 
 class SalesController extends Controller
 {
@@ -25,6 +26,63 @@ class SalesController extends Controller
     }
 
 
+    public function conv_pdf( $sales ){
+
+$html_table = '
+<h2 style="text-align: center;">Sales information </h2>
+<table style="border: 1px solid black;
+  border-collapse: collapse; width: 100%;">
+  <tr>
+    <th style="border: 1px solid black;
+  border-collapse: collapse;">#</th>
+    <th style="border: 1px solid black;
+  border-collapse: collapse;">product</th>
+    <th style="border: 1px solid black;
+  border-collapse: collapse;">Cost</th>
+  <th style="border: 1px solid black;
+  border-collapse: collapse;">paid</th>
+    <th style="border: 1px solid black;
+  border-collapse: collapse;">remain</th>
+  <th style="border: 1px solid black;
+  border-collapse: collapse;">paid_cost</th>
+    <th style="border: 1px solid black;
+  border-collapse: collapse;">remain_cost</th>
+  <th style="border: 1px solid black;
+  border-collapse: collapse;">who</th>
+  <th style="border: 1px solid black;
+  border-collapse: collapse;">date</th>
+  ';
+foreach ( $sales as $sale ){
+    $html_table .= '
+<tr>
+    <td style="border: 1px solid black;
+  border-collapse: collapse; padding: 3px; text-align:center;">'.$sale->id.'</td>
+       <td style="border: 1px solid black;
+  border-collapse: collapse; padding: 3px; text-align:center;">'.$sale->product->product_name.'</td>
+      <td style="border: 1px solid black;
+  border-collapse: collapse; padding: 3px; text-align:center;">'.$sale->product->product_cost.'</td>
+   <td style="border: 1px solid black;
+  border-collapse: collapse; padding: 3px; text-align:center;">'.$sale->received_amount.'</td>
+   <td style="border: 1px solid black;
+  border-collapse: collapse; padding: 3px; text-align:center;">'.$sale->remain_amount.'</td>
+   <td style="border: 1px solid black;
+  border-collapse: collapse; padding: 3px; text-align:center;">'.$sale->paid_money.'</td>
+   <td style="border: 1px solid black;
+  border-collapse: collapse; padding: 3px; text-align:center;">'.$sale->remain_money.'</td>
+   <td style="border: 1px solid black;
+  border-collapse: collapse; padding: 3px; text-align:center;">'.$sale->who_buys.'</td>
+   <td style="border: 1px solid black;
+  border-collapse: collapse; padding: 3px; text-align:center;">'.$sale->created_at.'</td>
+
+  </tr>';
+}
+        $html_table .= '</table>';
+
+
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML( $html_table );
+        return $pdf->stream();
+    }
 
 
 
@@ -41,7 +99,7 @@ class SalesController extends Controller
 
 
     public function deletedFromToSales(Request $request){
-  
+
               $rules = array(
                 'from_date' => ['required'],
                 'to_date' => ['required'],
@@ -59,6 +117,7 @@ class SalesController extends Controller
         ->where('created_at', '>', date('Y-m-d', strtotime($request->from_date)) )
         ->where( 'created_at', '<', date('Y-m-d', strtotime($request->to_date)) );
         $datas->forceDelete();
+            session()->flash('success', 'successfully delete the datas');
         return redirect()->route('sales.deleted');
               }
 
@@ -294,4 +353,28 @@ if( $prev_data == null ){
         }
         return $out;
     }
+
+
+    public function sales_pdf_data_from_to( Request $request ){
+
+              $rules = array(
+                'from_date' => ['required'],
+                'to_date' => ['required'],
+              );
+              $error = Validator::make($request->all(), $rules);
+
+        if ($error->fails()) {
+               session()->flash('error', 'please make sure you fill all the data');
+               return redirect()->route('sales.index');
+        }elseif (date('Y-m-d h:i:s A', strtotime($request->from_date)) > date('Y-m-d, h:i:s A', strtotime($request->to_date))) {
+                    session()->flash('error', 'to date is smaller than from date');
+               return redirect()->route('sales.index');
+              }else{
+                   $datas = Sale::where('created_at', '>', date('Y-m-d, h:i:s', strtotime($request->from_date)) )
+        ->where( 'created_at', '<', date('Y-m-d h:i:s', strtotime($request->to_date)) )->get();
+
+                    return $this->conv_pdf( $datas );
+              }
+    }
+
 }

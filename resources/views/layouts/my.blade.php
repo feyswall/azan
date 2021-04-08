@@ -64,6 +64,7 @@
 <x-models.loader-model></x-models.loader-model>
 <!-- selling model -->
 <x-models.sell></x-models.sell>
+
 @yield('models')
 
 

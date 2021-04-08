@@ -36,6 +36,8 @@ Route::name('')->group( function(){
     Route::post('/sales/custome/del/{id}', 'SalesController@salesDeleteAjax' )->name('sales.custome.del');
     Route::get('/sales/custome/deleted', 'SalesController@deletedSales')->name('sales.deleted');
     Route::post('/sales/custome/delete/fromto', 'SalesController@deletedFromToSales' )->name('sales.delete.fromto');
+        Route::post('/sales/custome/pdf/fromto', 'SalesController@sales_pdf_data_from_to' )->name('sales.pdf.fromto');
+    Route::get('/sales/custome/pdf', 'SalesController@conv_pdf')->name('sales.custome.pdf');
 });
 
 Route::name('')->group( function(){
@@ -55,7 +57,7 @@ Route::namespace('Admin')->prefix('Admin')->name('admin')->middleware('can:manag
 });
 // Normal user 'user routes'
  Route::get('/user/profile', 'HomeController@userProfile')->name('user.profile');
-
+  Route::post('/user/change/password', 'HomeController@changePassword')->name('user.change.password');
 
 //ajax routes for ingridients
 Route::name('ingridient')->middleware('can:edit-ingr')->group( function(){
@@ -64,5 +66,5 @@ Route::name('ingridient')->middleware('can:edit-ingr')->group( function(){
 });
 
 
-
+Route::get('sale/conv_pdf', 'DynamicPDFController@conv_pdf')->name('sales.pdf');
 

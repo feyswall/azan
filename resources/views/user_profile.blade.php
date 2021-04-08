@@ -7,6 +7,16 @@
 
 
 @section('page-content')
+ @if( session()->has('error') )
+<div class="alert alert-danger">
+    <p><b>{{ session()->get('error') }}</b></p>
+</div>
+@endif
+ @if( session()->has('success') )
+<div class="alert alert-success">
+    <p><b>{{ session()->get('success') }}</b></p>
+</div>
+@endif
 <div class="mb-4 shadow card">
     <div class="py-3 mb-4 card border-left-primary">
         <div class="card-body">
@@ -36,12 +46,15 @@
                             </td>
                             <td>{{ $user->created_at }}</td>
                           </tr>
-
-                          <td colspan="2">
-                            <a class="btn btn-outline-primary btn-block btn-sm" data-toggle="modal" data-target="#editUserModel-0">Edit</a>
-                          </td>
                         </tbody>
                       </table>
+                </div>
+                <div class="col-md-4">
+                  <ul class="list-group list-group-flush">
+  <li class="list-group-item"> <a href="#" data-toggle="modal" data-target="#changePass">change password</a></li>
+    <li class="list-group-item">A second item</li>
+  <li class="list-group-item">A third item</li>
+</ul>
                 </div>
            </div>
         </div>
@@ -54,7 +67,62 @@
 
 @section('models')
 
+<!-- Modal -->
+<div class="modal fade" id="changePass" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body p-5">
+         <form method="POST" action="{{ route('user.change.password') }}">
+           @csrf
+         <h3>Password Change Form</h3>            
 
+    <div class="col-sm-12">
+          <label for="current-password" class="col-sm-4 control-label">Current Password</label>
+      <div class="form-group">
+        <input type="password" class="form-control @error('current-password') is-invalid @enderror" id="current-password" name="current-password" placeholder="Password">
+         @error('current-password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+      </div>
+    </div>
+
+    <div class="col-sm-12">
+          <label for="password" class="col-sm-4 control-label">New Password</label>
+      <div class="form-group">
+        <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password">
+         @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+      </div>
+    </div>
+   
+    <div class="col-sm-12">
+       <label for="password_confirmation" class="col-sm-4 control-label">Re-enter Password</label>
+      <div class="form-group">
+        <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" id="password_confirmation" name="password_confirmation" placeholder="Re-enter Password">
+         @error('password_confirmation')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+      </div>
+    </div>
+
+  <div class="form-group">
+    <div class=" col-sm-12">
+      <button type="submit" class="btn btn-info">Submit</button>
+    </div>
+  </div>
+
+         </form>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
 
 

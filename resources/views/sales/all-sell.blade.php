@@ -7,9 +7,22 @@
 
 
 @section('page-content')
+     @if( session()->has('error') )
+<div class="alert alert-danger">
+    <p>  <i class="fas fa-exclamation-triangle"></i> <b>{{ session()->get('error') }}</b></p>
+</div>
+     @endif
+          @if( session()->has('success') )
+<div class="alert alert-success">
+    <p>  <i class="far fa-check-circle"></i>  <b>{{ session()->get('success') }}</b></p>
+</div>
+     @endif
 
 <div class="mb-4 shadow card">
     <div class="col-md-12 col-sm-12 offset-md-0 offset-sm-0">
+      <a   data-toggle="modal" data-target="#sellPdf" class="btn btn-danger m-3">convert to PDF  <i class="fas fa-file-export"></i></a>
+
+
         <div class="card-body">
 <table class="table table-responsive table-hover">
     <thead>
@@ -44,13 +57,13 @@
             <td>{{ $sale->who_buys }}</td>
             <td>
 
-                <form id="delSale-{{$b}}"  method="POST" action="sales/custome/del/{{ $sale->id }}" >
+ <a data-toggle="modal" data-target="#editSellModel-{{ $b }}" num="{{ $sale->id }}" class="btn btn-info btn-sm float-left mr-1"><i class="fas fa-edit"></i></a>
+                <form id="delSale-{{$b}}"  method="POST" action="sales/custome/del/{{ $sale->id }}" class="float-left" >
                   <input type="hidden" name="sale" class="form-control" value="{{ $sale->id }}" >
-                <button type="submit" class="btn btn-danger btn-sm"><i class=" fas fa-trash-alt"></i></button>
-                    <a data-toggle="modal" data-target="#editSellModel-{{ $b }}" num="{{ $sale->id }}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
+                <button type="submit" class="btn btn-danger btn-sm float-left"><i class=" fas fa-trash-alt"></i></button>
                 </form>
             </td>
-            <td>{{ date('y M d h:ia', strtotime($sale->created_at)) }}</td>
+            <td>{{ date('y M d h:i:s A', strtotime($sale->created_at)) }}</td>
             @php
                 $b++;
             @endphp
@@ -120,43 +133,6 @@
                                       </button>
                                       <hr>
                                   </form>
-
-                                  <form method="POST"  action="{{ route('sales.custome', $sales[$b]->id ) }}" class="w-100">
-@csrf
-                                    <input type="hidden" value="{{ $sales[$b]->id }}" name="sellId">
-                                    <input type="hidden" value="{{ $b }}" name="formId">
-
-
-                                <div class="form-group">
-                                  <label for="product"></label>
-                                    <select name="product" class="form-control" required>
-                                           <option selected='selected'> choose product...</option>
-                                        @foreach ( \App\Product::where('id', '>', '-2')->get() as $product )
-                                        <option  @if ( $sales[$b]->product->id == $product->id )
-                          selected
-                      @endif value="{{ $product->id }}">{{ $product->product_name }}</option>
-                          @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <input value="{{ $sales[$b]->total_amount }}" name="total_amount" type="number" class="form-control form-control-user" id="total_amount"
-                                        placeholder="total product" required>
-                                </div>
-                                <div class="form-group">
-                                    <input value="{{ $sales[$b]->received_amount }}" name="received_amount" type="number" class="form-control form-control-user" id="receive_amount"
-                                        placeholder="paid product" required>
-                                </div>
-
-                                <div class="form-group">
-                                    <input value="{{ $sales[$b]->who_buys }}" name="who_buys" type="text" class="form-control form-control-user" id="who_buys"
-                                        placeholder="who buys" >
-                                </div>
-
-                                <button type="submit" class="btn btn-primary btn-user btn-block">
-                                    sold
-                                </button>
-                                <hr>
-                            </form>
                               </div>
                           </div>
                               <div class="row justify-content-center">
@@ -184,6 +160,10 @@
  <input type="hidden" value="{{ $sales->count() }}" id="allData">
 
 
+
+
+<!-- pdf selling-->
+<x-models.sales-pdf></x-models.sales-pdf>
 
 @endsection
 

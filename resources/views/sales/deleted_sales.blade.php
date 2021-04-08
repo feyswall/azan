@@ -9,9 +9,15 @@
 @section('page-content')
      @if( session()->has('error') )
 <div class="alert alert-danger">
-    <p><b>{{ session()->get('error') }}</b></p>
+    <p>  <i class="fas fa-exclamation-triangle"></i> <b>{{ session()->get('error') }}</b></p>
 </div>
      @endif
+          @if( session()->has('success') )
+<div class="alert alert-success">
+    <p>  <i class="far fa-check-circle"></i>  <b>{{ session()->get('success') }}</b></p>
+</div>
+     @endif
+
 <div class="mb-4 shadow card">
     <div class="col-md-12 col-sm-12 offset-md-0 offset-sm-0">
         <div class="card-body">
