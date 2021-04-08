@@ -72,7 +72,7 @@ foreach ( $sales as $sale ){
    <td style="border: 1px solid black;
   border-collapse: collapse; padding: 3px; text-align:center;">'.$sale->who_buys.'</td>
    <td style="border: 1px solid black;
-  border-collapse: collapse; padding: 3px; text-align:center;">'.$sale->created_at.'</td>
+  border-collapse: collapse; padding: 3px; text-align:center;">'.date( "Y-m-d, h:i:s A", strtotime( $sale->created_at )).'</td>
 
   </tr>';
 }
@@ -370,8 +370,8 @@ if( $prev_data == null ){
                     session()->flash('error', 'to date is smaller than from date');
                return redirect()->route('sales.index');
               }else{
-                   $datas = Sale::where('created_at', '>', date('Y-m-d, h:i:s', strtotime($request->from_date)) )
-        ->where( 'created_at', '<', date('Y-m-d h:i:s', strtotime($request->to_date)) )->get();
+                   $datas = Sale::where('created_at', '>=', date('Y-m-d h:i:s', strtotime($request->from_date)) )
+        ->where( 'created_at', '<=', date('Y-m-d h:i:s', strtotime($request->to_date)) )->get();
 
                     return $this->conv_pdf( $datas );
               }
