@@ -77,7 +77,7 @@
                 <td>{{ $stockHist[$b]->amount }}</td>
                                 <td>
                     @php
-  $user = App\user::find( $stockHist[$b]->user_id );
+  $user = App\User::find( $stockHist[$b]->user_id );
                         echo $user->name;
                   @endphp
                 </td>
