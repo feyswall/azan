@@ -74,7 +74,7 @@
         <div class="mb-1 text-xs font-weight-bold text-warning text-uppercase">Product  ( Paid/Total )</div>
                                             <div class="mb-0 text-gray-800 h5 font-weight-bold">
                                              <div class="progress md-progress" style="height: 20px">
-  <div class="progress-bar" role="progressbar" style="width: {{ $yesterday_paid_products  }}%; height: 20px" aria-valuenow="{{ $yesterday_paid_products }}" aria-valuemin="0" aria-valuemax="{{ $yesterday_total_products }}">{{ 
+  <div class="progress-bar" role="progressbar" style="width: {{ round( ($yesterday_paid_products/ $yesterday_total_products ) * 100) }}%; height: 20px" aria-valuenow="{{ round( ($yesterday_paid_products/ $yesterday_total_products ) * 100) }}" aria-valuemin="0" aria-valuemax="100">{{ 
         round( ($yesterday_paid_products/ $yesterday_total_products ) * 100) }}%</div>
 </div>
                                         </div>
