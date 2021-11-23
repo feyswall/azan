@@ -49,7 +49,7 @@ Route::name('')->group( function(){
 });
 
 
-Route::namespace('Admin')->prefix('Admin')->name('admin')->middleware('can:manage-users')->group( function(){
+Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group( function(){
     Route::resource('/users', 'UsersController');
     Route::post('/user/delete/{id}', 'UsersController@deleteAjax')->name('userDeleteAjax');
     Route::post('/user/custome/{id}', 'UsersController@updateAjax')->name('userUpdateAjax');
@@ -57,7 +57,7 @@ Route::namespace('Admin')->prefix('Admin')->name('admin')->middleware('can:manag
 });
 // Normal user 'user routes'
  Route::get('/user/profile', 'HomeController@userProfile')->name('user.profile');
-  Route::post('/user/change/password', 'HomeController@changePassword')->name('user.change.password');
+ Route::post('/user/change/password', 'HomeController@changePassword')->name('user.change.password');
 
 //ajax routes for ingridients
 Route::name('ingridient')->middleware('can:edit-ingr')->group( function(){

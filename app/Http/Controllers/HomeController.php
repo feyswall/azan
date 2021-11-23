@@ -70,17 +70,22 @@ return view('home')
 
         public function changePassword(Request $request){
             request()->validate([
-    'current-password' => 'required',
-    'password' => 'required|same:password',
+    'current_password' => 'required',
+    'password' => 'required|confirmed',
     'password_confirmation' => 'required|same:password', 
             ]);
 
         $user = auth()->user()->id;
             $us = User::find($user);
+            if ( Hash::check( $request->current_password, $us->password) ) {
                   $us->password = Hash::make($request->password);
                   $us->save();
                 session()->flash('success',  'password changed');  
                 return redirect()->route('user.profile') ;
+            }else{
+                session()->flash('error', 'The password is not valid please make sure you type  you password correctly');
+                return redirect()->route('user.profile');   
+            }
                     }
 
 }

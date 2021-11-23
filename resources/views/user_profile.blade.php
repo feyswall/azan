@@ -60,13 +60,11 @@
         </div>
     </div>
 </div>
-
-
-
 @endsection
 
-@section('models')
 
+<!-- change password model-->
+@section('models')
 <!-- Modal -->
 <div class="modal fade" id="changePass" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -75,28 +73,26 @@
          <form method="POST" action="{{ route('user.change.password') }}">
            @csrf
          <h3>Password Change Form</h3>            
-
     <div class="col-sm-12">
           <label for="current-password" class="col-sm-4 control-label">Current Password</label>
       <div class="form-group">
-        <input type="password" class="form-control @error('current-password') is-invalid @enderror" id="current-password" name="current-password" placeholder="Password">
-         @error('current-password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+        <input type="password" class="form-control @error('current_password') is-invalid @enderror" id="current-password" name="current_password" placeholder="Password">
+         @error('current_password')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+          @enderror
       </div>
     </div>
-
     <div class="col-sm-12">
           <label for="password" class="col-sm-4 control-label">New Password</label>
       <div class="form-group">
         <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password">
          @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+              <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+          @enderror
       </div>
     </div>
    

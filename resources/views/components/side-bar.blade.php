@@ -147,7 +147,7 @@
         <!-- Nav Item - Tables -->
         @can('edit-user')
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('adminusers.index') }}">
+            <a class="nav-link" href="{{ route('admin.users.index') }}">
                 <i class="fas fa-users"></i>
                 <span>Manage Users</span></a>
         </li>
