@@ -31,7 +31,7 @@ class SalesController extends Controller
 $html_table = '
 <h2 style="text-align: center; font-family: Hoefler Text;">Sales information </h2>
 <table style="border: 1px solid black;
-  border-collapse: collapse; width: 100%;">
+  border-collapse: collapse; width: auto">
   <tr>
     <th style="border: 1px solid black;
   border-collapse: collapse;">#</th>

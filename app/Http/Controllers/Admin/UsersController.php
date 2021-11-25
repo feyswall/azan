@@ -21,7 +21,7 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(  )
+    public function index( )
     {
         $data = User::where('id', '!=', auth()->id())->get();
         return view('manage-users')->with('datas', $data );
@@ -46,37 +46,38 @@ class UsersController extends Controller
 
     if( $flight->email == $request->email ){
                 if( $request->password == null ){
-                    $rules = array(
-                        'name' => ['required', 'string', 'max:255'],
+                //     $rules = array(
+                //         'name' => ['required', 'string', 'max:255'],
+                //         'role' => ['required']
+                // );
+                $request->validate([
+                    'name' => ['required', 'string', 'max:255'],
+                        'password' => [''],
                         'role' => ['required']
-                );
+                    ]);
                 }else{
-                    $rules = array(
-                        'name' => ['required', 'string', 'max:255'],
+                   $request->validate([
+                    'name' => ['required', 'string', 'max:255'],
                         'password' => ['string', 'min:8', 'confirmed'],
                         'role' => ['required']
-                );
+                   ]);
                 }
 
     }else{
         if( $request->password == null ){
-            $rules = array(
+            $request->validate([
                 'name' => ['required', 'string', 'max:255'],
                 'role' => ['required']
-        );
+            ]);
         }else{
-            $rules = array(
+            $request->validate([
                 'name' => ['required', 'string', 'max:255'],
                 'password' => ['string', 'min:8', 'confirmed'],
                 'role' => ['required']
-        );
+            ]);
         }
     }
 
-    $error  =  Validator::make( $request->all(), $rules );
-    if ($error->fails()) {
-        return response()->json(['error' => $error->errors()->all()]);
-    }else {
 
             if( $flight->email == $request->email ){
                 $flight->name = $request->name;
@@ -91,7 +92,6 @@ class UsersController extends Controller
 
         $flight->roles()->sync( $request->role );
         return response()->json(['success' => 'created successfully']);
-    }
 
     }
 

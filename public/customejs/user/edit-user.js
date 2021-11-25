@@ -67,7 +67,7 @@ $(document).ready(function() {
                                     $('#edit-user-model-'+userFormId).css('display', 'none');
                                 },
                                 dataType : 'json',
-                                url:"/Admin/user/custome/"+userId,
+                                url:"/admin/user/custome/"+userId,
                                 data:{
                                     name:name,
                                     email: email,
@@ -75,49 +75,57 @@ $(document).ready(function() {
                                     role: role,
                                     password_confirmation: password_confirmation
                                 },
-                                error: function( jqXHR, textStatus, errorThrown ){
-                                    alert( jqXHR.responseJSON.message )
-                                    setTimeout(function(){ location.reload(); }, 500);
+                                error: function( responce ){
+                                    // converting js object to array
+                                    var obj = JSON.parse( responce.responseText ).errors;
+                                    Object.entries(obj).forEach(
+                                        ([key, value]) => {
+                                            $('#edit-user-loader-'+userFormId).css('display', 'none');
+                                            $('#edit-user-model-'+userFormId).css('display', 'block');
+                                            $('#edit-user-model-'+userFormId).prepend("<div class='form-group row mb-0 justify-content-center'><span class='alert alert-danger'>"+value[0]+"</span></div>");
+                                        }
+                                    );
+
+                                 
                                 },
-                                success:function(data){
-                                    toastr.options = {
-                                        'closeButton': true,
-                                        'debug': false,
-                                        'newestOnTop': false,
-                                        'progressBar': false,
-                                        'positionClass': 'toast-top-right',
-                                        'preventDuplicates': false,
-                                        'showDuration': '1000',
-                                        'hideDuration': '1000',
-                                        'timeOut': '5000',
-                                        'extendedTimeOut': '1000',
-                                        'showEasing': 'swing',
-                                        'hideEasing': 'linear',
-                                        'showMethod': 'fadeIn',
-                                        'hideMethod': 'fadeOut',
-                                    }
-                                    if( data.error ){
-                                          $('#edit-user-loader-'+userFormId).css('display', 'none');
-                                    $('#edit-user-model-'+userFormId).css('display', 'block');
-                                        // $('#model-btn-'+inId).click();
-                                        toastr.error( data.error );
+                                success:function(data){           
+                                        toastr.options = {
+                                            'closeButton': true,
+                                            'debug': false,
+                                            'newestOnTop': false,
+                                            'progressBar': false,
+                                            'positionClass': 'toast-top-right',
+                                            'preventDuplicates': false,
+                                            'showDuration': '1000',
+                                            'hideDuration': '1000',
+                                            'timeOut': '5000',
+                                            'extendedTimeOut': '1000',
+                                            'showEasing': 'swing',
+                                            'hideEasing': 'linear',
+                                            'showMethod': 'fadeIn',
+                                            'hideMethod': 'fadeOut',
+                                        }
+                                        if( data.error ){
+                                            $('#edit-user-loader-'+userFormId).css('display', 'none');
+                                        $('#edit-user-model-'+userFormId).css('display', 'block');
+                                            // $('#model-btn-'+inId).click();
+                                            toastr.error( data.error );
 
-                                    }else if ( data.success ) {
-                                        $('#edit-user-loader-'+userFormId).css('display', 'none');
-                                        $("#model-user-btn-"+userFormId).click();
-                                      $("#defaultModelButton").click();
-                                        Swal.fire({
-                                            position: 'top-end',
-                                            icon: 'success',
-                                            title: 'Your data has updated',
-                                            showConfirmButton: false,
-                                            timer: 1500
-                                        })
-
-                                        setTimeout(function(){ location.reload(); }, 1000);
-                                    } else {
-                                        toastr.warning('Something just went wrong please Try again');
-                                    }
+                                        }else if ( data.success ) {
+                                            $('#edit-user-loader-'+userFormId).css('display', 'none');
+                                            $("#model-user-btn-"+userFormId).click();
+                                        $("#defaultModelButton").click();
+                                            Swal.fire({
+                                                position: 'top-end',
+                                                icon: 'success',
+                                                title: 'Your data has updated',
+                                                showConfirmButton: false,
+                                                timer: 1500
+                                            })
+                                            setTimeout(function(){ location.reload(); }, 1000);
+                                        } else {
+                                            toastr.warning('Something just went wrong please Try again');
+                                        }
                                 }
                             });
 
@@ -134,6 +142,7 @@ $(document).ready(function() {
         });
     }
 });
+
 
 
 

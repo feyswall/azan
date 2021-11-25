@@ -18,7 +18,7 @@
               <form class="p-5 user" id="sell-product-form">
                 <h3>Sell Product</h3>
                 <div class="form-group">
-                  <label for="product"></label>
+                  <label for="product">Select your product</label>
                     <select name="product" class="form-control" required>
                         <option selected='selected'> choose product...</option>
                         @foreach ( \App\Product::where('id', '>', '-2')->get() as $product )
@@ -27,17 +27,20 @@
                     </select>
                 </div>
                 <div class="form-group">
+                  <label for="total_amount">Total product</label>
                     <input name="total_amount" type="number" class="form-control form-control-user" id="total_amount"
                         placeholder="total product" required>
                 </div>
                 <div class="form-group">
+                  <label for="received_amount">paid product</label>
                     <input name="received_amount" type="number" class="form-control form-control-user" id="receive_amount"
                         placeholder="paid product" required>
                 </div>
 
                 <div class="form-group">
+                  <label for="who_buys">who buys</label>
                     <input name="who_buys" type="text" class="form-control form-control-user" id="who_buys"
-                        placeholder="who buys" >
+                        value="mteja" >
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-user btn-block">
