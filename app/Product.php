@@ -40,7 +40,7 @@ class Product extends Model
      */
     public function stock()
     {
-        return $this->hasOne(Stock::class);
+        return $this->hasOne(Stock::class)->withDefault();
     }
 
     public function stockTraces()

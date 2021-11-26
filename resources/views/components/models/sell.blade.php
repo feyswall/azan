@@ -16,11 +16,12 @@
     <div class="row justify-content-start">
       <div class="col-md-7">
               <form class="p-5 user" id="sell-product-form">
+
                 <h3>Sell Product</h3>
                 <div class="form-group">
-                  <label for="product">Select your product</label>
+                  <label for="product">Select product</label>
                     <select name="product" class="form-control" required>
-                        <option selected='selected'> choose product...</option>
+                        <option selected='selected' value="null"> choose product...</option>
                         @foreach ( \App\Product::where('id', '>', '-2')->get() as $product )
                         <option value="{{ $product->id }}">{{ $product->product_name }}</option>
                         @endforeach
@@ -50,7 +51,7 @@
             </form>
       </div>
       <div class="mt-3 col-md-4">
-        <h4>Your Stock Balance</h4>
+        <h4 class="text-center">Your Stock Balance</h4>
         <ul>
           @foreach( App\Stock::all() as $stock )
                     @php

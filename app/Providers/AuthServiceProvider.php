@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use App\Product;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -47,6 +48,15 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('manage-sale', function($user){
             return $user->hasAnyRole(['admin']);
+        });
+
+        Gate::define('product_exist', function($user){
+            $product_count = Product::all()->count();
+            if ( $product_count > 0 ){
+                return true;
+            }else{
+                return false;
+            }
         });
 
 #

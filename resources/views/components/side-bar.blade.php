@@ -77,7 +77,9 @@
                 data-parent="#accordionSidebar">
                 <div class="py-2 bg-white rounded collapse-inner">
                     {{-- <h6 class="collapse-header">Custom Utilities:</h6> --}}
+                    @can('product_exist')
                     <a class="collapse-item" id="selltModelButton" type="button" data-toggle="modal" data-target="#sellModel" >Sell Now</a>
+                    @endcan
                     <a class="collapse-item" id="" href="{{ route('sales.index') }}" type="button" >All Sales</a>
                      @can('manage-sale')
                     <a class="collapse-item" id="" href="{{ route('sales.deleted') }}" type="button" >deleted sales</a>

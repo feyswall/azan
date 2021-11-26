@@ -4,19 +4,18 @@ $(document).ready(function() {
     });
 
    $.ajaxSetup({
-                    headers: {
-                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
-                    }
-                });
-
+    headers: {
+        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+    }
+});
 
 $("#sell-product-form").submit( function(e){
     e.preventDefault();
-      let sell_form = $("#sell-product-form");
-        let total_amount = $( sell_form ).find("input[name='total_amount']").val()
-         let received_amount = $( sell_form ).find("input[name='received_amount']").val()
-          let product = $( sell_form ).find("select[name='product']").val()
-          let who_buys = $( sell_form ).find("input[name='who_buys']").val()
+      var sell_form = $("#sell-product-form");
+        var total_amount = $( sell_form ).find("input[name='total_amount']").val()
+         var received_amount = $( sell_form ).find("input[name='received_amount']").val()
+          var product = $( sell_form ).find("select[name='product']").val()
+          var who_buys = $( sell_form ).find("input[name='who_buys']").val()
 
         $.ajax({
             url: '/sales',
@@ -29,7 +28,7 @@ $("#sell-product-form").submit( function(e){
                 total_amount: total_amount,
                 received_amount: received_amount,
                 product: product,
-                who_buys: who_buys,
+                who_buys: who_buys
             },
             dataType: 'json',
             success: function( data ){
@@ -50,66 +49,49 @@ $("#sell-product-form").submit( function(e){
                             'showEasing': 'swing',
                             'hideEasing': 'linear',
                             'showMethod': 'fadeIn',
-                            'hideMethod': 'fadeOut',
-                        }
+                            'hideMethod': 'fadeOut'
+                        };
+
+                        const swalWithBootstrapButtons = Swal.mixin({
+                            customClass: {
+                                confirmButton: 'btn btn-success',
+                                cancelButton: 'btn btn-danger'
+                            },
+                            buttonsStyling: false
+                        });
 
 
+            swalWithBootstrapButtons.fire({
+              title: 'Sold',
+              text: "do you want to see sales",
+              icon: 'success',
+              showCancelButton: true,
+              confirmButtonText: 'view in table',
+              cancelButtonText: 'No, cancel!',
+              reverseButtons: true
+            }).then((result) => {
+              if (result.isConfirmed) {
+                location.href = '/sales';
+              }else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
 
-
-
-
-
-
-
-
-
-const swalWithBootstrapButtons = Swal.mixin({
-  customClass: {
-    confirmButton: 'btn btn-success',
-    cancelButton: 'btn btn-danger'
-  },
-  buttonsStyling: false
-})
-
-swalWithBootstrapButtons.fire({
-  title: 'Sold',
-  text: "do you want to see sales",
-  icon: 'success',
-  showCancelButton: true,
-  confirmButtonText: 'view in table',
-  cancelButtonText: 'No, cancel!',
-  reverseButtons: true
-}).then((result) => {
-  if (result.isConfirmed) {
-    location.href = '/sales';
-  } else if (
-    /* Read more about handling dismissals below */
-    result.dismiss === Swal.DismissReason.cancel
-
-  ) {
-    setTimeout(function(){ location.reload(); }, 500);
-  }
-})
-
-
-
-
-
-
-
-
-
-
+              ) {
+                setTimeout(function(){ location.reload(); }, 500);
+              }
+            })
 
 
 
                     }else if ( data.error ) {
-                        $("#defaultModelClose").click();
                         toastr.error( data.error );
+                        setInterval(function (args) {
+                            $("#defaultModelClose").click();
+                            }, 500 );
                     } else {
                         $("#defaultModelClose").click();
                         toastr.warning( 'undetected error' );
                     }
-            },
+            }
         });
 });

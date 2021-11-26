@@ -141,58 +141,63 @@ foreach ( $sales as $sale ){
      */
     public function store(Request $request)
     {
+        // see if user choose a product to sell
+        if ( $request->product == 'null' ){
+            return response()->json(['error' => ['you didn\'t choose any product']]);
+        }
+        // making sure that received amount do not exceed buyed  amount
+        if ( $request->total_amount < $request->received_amount){
+            return response()->json(['error' => ['the number of product paid exceed that of buyed']]);
+        }
 
-
+        //Making sure that the user inputs reach the requirements
         $rules = array(
             'total_amount' => ['required', 'integer', 'min:1'],
             'received_amount' => ['required', 'integer', 'min:0'],
         );
-        $error = Validator::make($request->all(), $rules);
 
+
+        $error = Validator::make($request->all(), $rules);
         if ($error->fails()) {
                 return response()->json(['error' => $error->errors()->all()]);
         }
 
-$product_cost = Product::find( $request->product );
-$product_cost = $product_cost->product_cost;
-$user =  auth()->user()->id ;
-$total = $request->total_amount;
-$received = $request->received_amount;
-if( $total < $received ){
-    return response()->json(['error' => 'Total is less Than Expected' ]);
-}
+         // View product and see if we have enough amount in our stock
+        $product = Product::find( $request->product );
+         if ( $product->stock->amount == null || $product->stock->amount < $request->total_amount ){
+             return response()->json(['error' => ['running out of product in your stock']]);
+         }
 
-$prev_data = Stock::where( 'product_id', $request->product )->first();
-if( $prev_data == null ){
-    return response()->json(['error' => 'stock has no product of this type' ]);
-}else{
-    if ($prev_data->amount < $received ) {
-        return response()->json(['error' => 'stock has '.$prev_data->amount.' only' ]);
-    }else{
+         // make data easy to use in my code
+        $product_cost = $product->product_cost;
+        $user_id =  auth()->user()->id ;
+        $total = $request->total_amount;
+        $received = $request->received_amount;
+
+        // creating a new sale column on our database
         $sell = Sale::create([
             'total_amount' => $total,
             'received_amount' => $received,
             'remain_amount' => ( $total - $received ),
-
             'paid_money' => (  $received * $product_cost ),
             'remain_money' => ( ($total - $received)*$product_cost ),
             'total_money' => ( $total*$product_cost ),
-            'user_id' => $user,
+            'user_id' => $user_id,
             'product_id' => $request->product,
             'who_buys' => $request->who_buys,
-    ]);
+         ]);
 
-
-    Stock::where('product_id', $request->product )->update([
-        'amount' => (  $prev_data->amount - $total  ),
-    ]);
      if( $sell ){
-        return response()->json(['success' => $request->total_amount ]);
+         // update the product information on the stock
+         $prev_data = Stock::where( 'product_id', $request->product )->first();
+         Stock::where('product_id', $request->product )->update([
+             'amount' => (  $prev_data->amount - $total  ),
+         ]);
+         // returning the whole thing to where it's ajax father
+        return response()->json(['success' => ['you just sell that product!'] ]);
      }else{
-        return response()->json(['error' => $request->total_amount ]);
+        return response()->json(['error' => ['something just went wrong please try sell it again!'] ]);
      }
-    }
-}
 
     }
 
