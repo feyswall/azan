@@ -10,7 +10,7 @@ function deleteUser(m){
 
            $("#defaultModelButton").click();
         },
-        url: '/Admin/user/delete/'+ m,
+        url: '/admin/user/delete/'+ m,
         data: { id:m },
         dataType: 'json',
         // statusCode: {

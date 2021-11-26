@@ -50,7 +50,7 @@ $(document).ready(function() {
                         $('#regBtn').attr('disabled', true );
                     },
                     dataType : 'json',
-                    url:"/Admin/users",
+                    url:"/admin/users",
                     data:{
                         name: name,
                         email: email,

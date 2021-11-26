@@ -145,7 +145,7 @@ foreach ( $sales as $sale ){
 
         $rules = array(
             'total_amount' => ['required', 'integer', 'min:1'],
-            'received_amount' => ['required', 'integer', 'min:1'],
+            'received_amount' => ['required', 'integer', 'min:0'],
         );
         $error = Validator::make($request->all(), $rules);
 
