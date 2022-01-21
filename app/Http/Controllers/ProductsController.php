@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Validator;
 
 class ProductsController extends Controller
 {
+
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -22,7 +26,83 @@ class ProductsController extends Controller
         return view('product.all-products')
         ->with( 'products', $products )
         ->with('ingridients', $ingridients);
+
     }
+
+
+
+
+
+
+    public function allProductsTable()
+    {
+        $products = Product::all();
+        $ingridients = Ingridient::all();
+
+            // function form ingrient html content
+             function ingridientContent( $products, $b ){
+                    $ingridient_content = "";
+                    foreach( $products[$b]->ingridients()->pluck('ingridient_name') as $name ){
+                    $ingridient_content .= "
+                        <li> ". $name ."</li>
+                            ";
+                    }
+                    return $ingridient_content;
+            }
+
+             // function for product content       
+             function productContent($products){
+                $product_content = "";
+                for( $b=0; $b < $products->count(); $b++ ){
+                $product_content .= "
+                    <tr>
+                        <td> ".  $b ." </td>
+                        <td>".  $products[$b]->product_name ." </td>
+                        <td>
+                            <ul>
+                            ". ingridientContent( $products, $b )."
+                            </ul>
+                        </td>
+                        <td>". $products[$b]->product_cost."</td>
+                        <td>
+                            <a class='btn btn-primary btn-sm' data-toggle='modal' data-target='#editProductModlel-". $b."'>Edit</a>
+                                <button form='product-delete-form-".$b."' num='". $products[$b]->id ."' id='deleteProductButton-". $b ."' class='btn btn-sm btn-danger'>Delete</button>
+                            <form name='product-delete-form-".$b."' id='product-delete-form-".$b."' action='product/".$products[$b]->id."' method='post'>
+                                ".csrf_field()."
+                                <input type='hidden' name='_method' value='DELETE'>
+                            </form>
+                        </td>
+                    </tr>";
+                    }
+                    return $product_content;
+            }
+
+            // loading the final table for product page
+             $content = '<table id="all-user-table" class="display" style="width:100%">
+                            <thead>
+                            <tr>
+                                <td>#</td>
+                                <th>product: Name</th>
+                                <th>Ingridients</th>
+                                <th>Cost</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                               '.  productContent($products) .'
+                            </tbody>
+                            <tfoot>
+
+                            </tfoot>
+                        </table>';
+                return $content;
+
+
+    }
+
+
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -33,6 +113,7 @@ class ProductsController extends Controller
     {
         //
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -71,6 +152,11 @@ class ProductsController extends Controller
         
     }
 
+
+
+
+
+
     /**
      * Display the specified resource.
      *
@@ -93,6 +179,14 @@ class ProductsController extends Controller
         //
     }
 
+
+
+
+
+
+
+
+
     /**
      * Update the specified resource in storage.
      *
@@ -102,8 +196,30 @@ class ProductsController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $errors = [ "error" => "none" ];
+        // validate the datag from the form
+        $validator = Validator::make($request->all(), [
+            'product' => "string|max:20",
+        ]);
+
+        if ($validator->fails()) {
+            $errors = [ "error" => "found", "response" => $validator->errors() ];
+            return response()->json( $errors );
+        }
+
+        $old_value = $product->product_name;
+        // update to database
+        $product->product_name = $request->product;
+        $product->save();
+
+       return  response()->json(["success" => "data changed ", "new" => $request->product, "old" => $old_value  ]);
     }
+
+
+
+
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -113,6 +229,23 @@ class ProductsController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+      $product->ingridients()->detach();
+        foreach( $product->sales as $sales ){
+            if ($sales) {
+                    $sales->delete();
+                }
+            }
+
+        if ( $product->stock ) {
+             $product->stock->delete();   
+        }
+
+        if ($product->stockTrace) {
+             $product->stockTrace->detach() ;
+        }
+    
+
+        $product->delete();
+        return response()->json(['delete' => $product]);
     }
 }

@@ -164,9 +164,11 @@ foreach ( $sales as $sale ){
 
          // View product and see if we have enough amount in our stock
         $product = Product::find( $request->product );
-         if ( $product->stock->amount == null || $product->stock->amount < $request->total_amount ){
-             return response()->json(['error' => ['running out of product in your stock']]);
-         }
+         if ( !$product->stock ){
+            return response()->json(['error' => ['running out of product in your stock']]);
+         }elseif( $product->stock->amount < $request->total_amount) {
+                return response()->json(['error' => ['running out of product in your stock']]);
+        }
 
          // make data easy to use in my code
         $product_cost = $product->product_cost;

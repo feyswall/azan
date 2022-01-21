@@ -19,18 +19,18 @@ class Sale extends Model
         return $this->belongsTo(User::class);
     }
 
+        /**
+         * The sales that belong to the Sale
+         *
+         * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+         */
     /**
-     * The sales that belong to the Sale
+     * The products that belong to the Sale
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-/**
- * The products that belong to the Sale
- *
- * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
- */
-public function product()
-{
-    return $this->belongsTo(Product::class);
-}
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

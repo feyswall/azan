@@ -1,16 +1,18 @@
 <div>
-    <table id="users-table" class="display" style="width:100%">
+    <table id="users-table" class="display" style="width: 100%;">
         <thead>
         <tr>
             <td>#</td>
             <th>user: Name</th>
             <th>user: access</th>
             <th>add date</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
         @for( $b=0; $b < $datas->count(); $b++ )
         <tr>
+            <td>{{ $b }}</td>
             <td>{{ $datas[$b]->name }}</td>
             <td><ul>
                 @foreach ( $datas[$b]->roles->pluck('name') as $role )
@@ -18,7 +20,7 @@
                 @endforeach
                 </ul>
             </td>
-            <th>{{ $datas[$b]->created_at }}</th>
+            <td>{{ $datas[$b]->created_at }}</td>
             <td>
                 <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editUserModel-{{ $b }}">Edit</a>
                 <a href="{{ route('admin.user.info', $datas[$b]->id ) }}" num="{{ $datas[$b]->id }}"  class="btn btn-sm btn-default">view</a>
@@ -26,8 +28,10 @@
             </td>
         </tr>
         @endfor
+      </tbody>
         <tfoot>
         <tr>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>

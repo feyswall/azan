@@ -3,9 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Product;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Ingridient extends Model
 {
+
+use SoftDeletes;
+
     protected $fillable = [
         'ingridient_name',
     ];

@@ -9,7 +9,7 @@
 @section('page-content')
 <div class="mb-4 shadow card">
     <div class="row justify-content-start">
-        <div class="col-md-8 col-sm-12">
+        <div class="col-md-12 col-sm-12">
             <div class="card-body">
                 <div class="card-body">
                    <x-models.all-users-table :datas="$datas"></x-models.all-users-table>

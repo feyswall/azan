@@ -93,5 +93,11 @@ $("#sell-product-form").submit( function(e){
                         toastr.warning( 'undetected error' );
                     }
             }
+        })
+        .fail( function( msg ){
+            if( msg.status == 500 ){
+                $("#defaultModelClose").click();
+                toastr.danger( msg.statusText );
+            }
         });
 });

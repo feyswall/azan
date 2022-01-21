@@ -27,6 +27,7 @@ Route::resource('/ingridient', 'IngridientsController', ['except' => ['update', 
 
 Route::name('')->middleware('can:manage-product')->group( function(){
     Route::resource('/product', 'ProductsController');
+    Route::get('/all_products_table', 'ProductsController@allProductsTable')->name('all.products');
 });
 
 

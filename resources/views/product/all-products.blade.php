@@ -1,4 +1,3 @@
-
 @extends('layouts.my')
 
 @section('links')
@@ -59,233 +58,254 @@
 
 
 
-
+<!--  all products table sectiion -->
  <div class="mb-4 shadow card border-left-primary">
 <div class="col-md-9 col-sm-12 offset-md-0 offset-sm-0">
     <div class="card-body">
-        <div class="card-body">
-            <table id="all-user-table" class="display" style="width:100%">
-                <thead>
-                <tr>
-                    <td>#</td>
-                    <th>product: Name</th>
-                    <th>Ingridients</th>
-                    <th>Cost</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                   @for( $b=0; $b < $products->count(); $b++ )
-             <tr>
-                      <td>{{ $b }}</td>
-                <td>{{ $products[$b]->product_name }} </td>
-                <td>
-                    <ul>
-                    @foreach( $products[$b]->ingridients->pluck('ingridient_name') as $name )
-                        <li>{{ $name }}</li>
-                    @endforeach
-                    </ul>
-                </td>
-                <td>{{ $products[$b]->product_cost }}</td>
-                   <td>
-            <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editIngridientModel-{{ $b }}">Edit</a>
-            <button num="{{ $products[$b]->id }}" id="deleteIngridientButton-{{ $b }}" class="btn btn-sm btn-danger">Delete</button>
-                    </td>
-            </tr>
-                    @endfor
-                </tbody>
-                <tfoot>
-
-                </tfoot>
-            </table>
+        <div id="product-table-div" class="card-body">
+<!-- table loaded with jquery -->       
+<div class="spinner-border" role="status">
+  <span class="sr-only">Loading...</span>
+</div> 
         </div>
     </div>
 </div>
 </div>
 
+
+
+
+
 @endsection
 
 @section('models')
+@section('models')
+<!-- add ingrifient model -->
+<x-models.add-ingridient></x-models.add-ingridient>
+<!-- edit model -->
+@for( $b=0; $b < $products->count(); $b++ )
+            <div class="modal fade" id="editProductModlel-{{$b}}" tabindex="-1" role="dialog"
+                 aria-labelledby="editIngridientModalLabel-{{$b}}"
+                 aria-hidden="true">
+                <div id="model-dialogue" class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addIngridientModalLabel">Ready to Leave?</h5>
+                            <button id="model-btn-{{$b}}" class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                          <div id="edit-ing-model-{{$b}}" class="w-100" >
+                              <!-- component -->
+                              <div class="p-0 w-100">
+                                <div class="alert alert-success" style="display: none;"><span id="success-{{ $b }}"></span></div>
+                                  <form name="myForm-{{ $b }}" action="{{ route('product.update', $products[$b] ) }}" method="POST" id="editProductForm-{{ $b }}" class="w-100">
+                                      <div class="form-group">
+                                          <label for="product_name">product name<span></span></label>
+                                          <input value="{{ $products[$b]->product_name }}" name="product" id="product-{{ $b }}" class="form-control" placeholder="Enter Ingridient Name">      
+                                            <span class="text-danger" id="product_span-{{ $b }}"></span>                    
+                                          <input type="hidden" value="{{ $products[$b]->id }}" name="product_id">
+                                          <input type="hidden" value="{{ $products[$b] }}" name="product_object">
+                                      </div>
+                                      <button id="btnForm-{{ $b }}" type="button" class="btn btn-primary">Submit</button>
+                                  </form>
+                              </div>
+                          </div>
+                              <div class="row justify-content-center">
+                                  <div class="col-md-12 col-sm-12">
+                                      <div id="edit-ing-loader-{{ $b }}" style="display: none " class="text-center modal-body">
+                                          <div class="loader1">
+                                              <span></span>
+                                              <span></span>
+                                              <span></span>
+                                              <span></span>
+                                              <span></span>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+@endfor
 
-
+    <!-- element counter very important -->
+ <input type="hidden" value="{{ $products->count() }}" id="allData">
 @endsection
 
 @section('customejs')
 <script src="{{ asset('customejs/user/delete-user.js') }}"></script>
 <script src="{{ asset('customejs/user/edit-user.js') }}"></script>
 
+<script src="{{ asset('customejs/product/add-product.js') }}"></script>
+
+
+
 <script>
-
-// $(document).ready(function() {
-//     $("#add-product-form").validate({
-//         rules: {
-//             product_name : {
-//                 required: true,
-//             },
-//         },
-//            submitHandler: function(g) {
-
-//            },
-//     });
-// });
-
-
+  let product_table;
   $(document).ready(function() {
-    var max_fields      = 100; //maximum input boxes allowed
-    var wrapper         = $(".input_fields_wrap"); //Fields wrapper
-    var add_button      = $(".add_field_button"); //Add button ID
-
-    var x = 1; //initlal text box count
-    $(add_button).click(function(e){ //on add input button click
-        e.preventDefault();
-         var all_ingridients = $(".product-form").find( "input[name='all_ingridients']" ).val();
-         all_ingridients = JSON.parse(all_ingridients);
-        if(x < max_fields){ //max input box allowed
-            x++; //text box incremen
-
-               function optioning(){
-                var noding = '';
-                 for ( var i = 0; i < all_ingridients.length; i++ ) {
-                    noding = noding + '<option value="'+all_ingridients[i].id+'">'+all_ingridients[i].ingridient_name+'</option>'
-                    }
-                    return noding;
-               }
-            var html = '  <div id="div-'+x+'" class="p-2 input-group"> '+
-            ' <select name="ingridient[]" class="custom-select" id="inputGroupSelect01">' +
-            optioning()+' </select>'+
- ' <input placeholder="weight in grams" name="amount[]" type="number" class="form-control" required="required" value="1">'+
-'<a href="#" class="remove_field"> <i class="pl-2 fas fa-times-circle fa-2x text-danger"></i></a> </div>';
-            $(wrapper).append(html); //add input box
-        }
-    });
-
-    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
-        e.preventDefault();
-        $(this).parent('div').remove(); x--;
-    });
-
-        $(".product-form").on("submit", function(e){ //user click on remove text
-            e.preventDefault();
-const swalWithBootstrapButtons = Swal.mixin({
-  customClass: {
-    confirmButton: 'btn btn-success',
-    cancelButton: 'btn btn-danger'
-  },
-  buttonsStyling: false
-})
-
-swalWithBootstrapButtons.fire({
-  title: 'Are you sure?',
-  text: "The Data Will Be Saved!",
-  icon: 'warning',
-  showCancelButton: true,
-  confirmButtonText: 'Yes, save it!',
-  cancelButtonText: 'No, cancel!',
-  reverseButtons: true
-}).then((result) => {
-  if (result.isConfirmed) {
-      var input_groups = document.querySelectorAll('.input-group');
-      var ingr = 0;
-      var ingr_arr = [];
-      var amount = 0;
-      var ingr_amount = [];
-      var product_name = $("input[name='product_name']").val();
-      var product_cost = $("input[name='product_cost']").val();
-
-      for (var i = 0; i < input_groups.length ; i++) {
-       ingr =  $(input_groups[i]).find( "select[name*='ingridient']" ).val();
-       amount =   $(input_groups[i]).find( "input[name*='amount']" ).val();
-       ingr_amount.push({'ingridient':ingr, 'amount':amount});
-       ingr_arr.push(ingr);
-      }
-             $.ajaxSetup({
-                    headers: {
-                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
-                    }
-                });
-
-                $.ajax({
-                    type:'POST',
-                        beforeSend: function(){
-                         $("#defaultModelButton").click();
-                    },
-                    dataType : 'json',
-                    url:"{{ route('product.store') }}",
-                    data:{
-                       ingr_amount:ingr_amount,
-                       product_name:product_name,
-                       ingr_arr:ingr_arr,
-                       product_cost : product_cost,
-                    },
-                    success: function ( data ){
-                         toastr.options = {
-                            'closeButton': true,
-                            'debug': false,
-                            'newestOnTop': false,
-                            'progressBar': false,
-                            'positionClass': 'toast-top-right',
-                            'preventDuplicates': false,
-                            'showDuration': '1000',
-                            'hideDuration': '1000',
-                            'timeOut': '5000',
-                            'extendedTimeOut': '1000',
-                            'showEasing': 'swing',
-                            'hideEasing': 'linear',
-                            'showMethod': 'fadeIn',
-                            'hideMethod': 'fadeOut',
-                        }
-                        if ( data.success ) {
-                              Swal.fire({
-                                position: 'top-end',
-                                icon: 'success',
-                                title: 'Your data has added',
-                                showConfirmButton: false,
-                                timer: 1500
-                            })
-                            setTimeout(function(){ location.reload(); }, 1000);
-                        }else if ( data.error ) {
-                            toastr.error( data.error[0] );
-                            $('#defaultModelClose').click();
-                        }else if ( data.test ) {
-                             console.log( data.test )
-                        }else{
-                            $('#defaultModelClose').click();
-                              toastr.warning('Something just went wrong please Try again');
-                        }
-                    }
-                });
-
-  } else if (
-    /* Read more about handling dismissals below */
-    result.dismiss === Swal.DismissReason.cancel
-  ) {
-
-  }
-})
 
 
-    });
-
-
-
-
-
-
-});
-</script>
-
-     <script>
-    $(document).ready(function() {
-        var all_products = function (){
-            $('#all-user-table').DataTable({
+       product_table = () => {
+          $.ajax({
+           url: '/all_products_table',
+           type: 'get',
+           dataType: 'html',
+           success: function( msg ){
+              $("#product-table-div").html( msg );
+              $('#all-user-table').DataTable({
                 responsive: true,
                 autoWidth: true
             });
+
+              /* implement deleting in the table */
+              del_product();
+           }
+         });
+      }
+
+
+      /* products table data comming from here*/
+       product_table();
+
+
+
+      /* select the input carrying total number of elements */
+      var product_count = document.querySelector('#allData').value;
+
+        // for multiple form submission
+        for( let i = 0; i < product_count.length; i++ ){
+
+          // prevent the enter key from submiting the form
+          $(window).keydown(function(event){
+            if(event.keyCode == 13) {
+              event.preventDefault();
+              myFormLoggic();
+            }
+          });
+
+
+           $('#btnForm-'+i ).on('click', function(event){
+              event.preventDefault();
+           //    myFormLoggic();
+           //      });
+
+           // let myFormLoggic = () => {
+              // saving the button
+              let btn = $(this);
+              btn.attr('disabled', 'disabled')
+
+              /* detecting the action of then form */
+            var btn_form = $(this).parent();
+
+            /* form action */
+            var form_action = btn_form.attr('action');
+
+            /* form method */
+            var form_method = btn_form.attr('method');
+
+             /* gathering your form inputs values */
+            var form_product_value = btn_form.find("input[name=product]").val();
+            var form_product_id = btn_form.find("input[name=product_id]").val();
+            var form_product_object = btn_form.find("input[name=product_object]").val();
+
+            $.ajaxSetup({
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                    }
+                    
+                });
+
+
+            /* sending the ajax request to a controller */
+          $.ajax({
+              url: form_action,
+              type: 'PATCH',
+              dataType: 'json',
+              data: {
+                product_object: form_product_object,
+                product: form_product_value,
+              },
+              success: function(data){
+                 // var response_var = JSON.parse( response );
+             if(data.error == "none"){
+                handleError( data );
+            }else{
+                handleSuccess( data );
+             }
+            },
+          });
+
+           var handleError = ( data ) => {
+           var element_span = $('#editProductForm-'+i ).find("span[id=product_span-"+i+"]");
+           element_span.text( data.response.product[0] );
+           btn.removeAttr('disabled');                  
+                  }
+
+            var handleSuccess = ( data ) => {
+              let success_msg = $("#success-"+ i);
+                success_msg.text( data.success+ " from '"+ data.old+"' to '"+ data.new +"'" );
+                success_msg.parent().css({
+                  display: 'block',
+                });
+           btn.removeAttr('disabled'); 
+           /* reload the products table*/
+           product_table();
+                  }
+
+
+                });
+           
         }
-        all_products();
-});
-         </script>
+
+     
+  });
+</script>
+
+
+<script>
+
+  let del_product = () => {
+        /* select the input carrying total number of elements */
+      var product_count = document.querySelector('#allData').value;
+
+      /* selecting the delete button */
+      for (let i = 0; i < product_count.length; i++) {
+        let del_btn = $( "#deleteProductButton" + i );
+            console.log( del_btn )
+        del_btn.click(function(event) {
+          event.preventDefault();
+          /* selectiong the form to get the path */
+          let del_form = $(this).attr("form");
+          let del_form_element = $( "#"+del_form );
+          let del_form_action = del_form_element.attr('action');
+          
+          /* sending the ajax request */
+          $.ajax({
+            url: del_form_action,
+            type: 'delete',
+            dataType: 'json',
+          })
+          .done(function( data ) {
+            console.log( data );
+            product_table()
+          })
+          .fail(function( ) {
+            console.log( "something went wrong" );
+          })
+
+        });
+      }
+  } 
+</script>
+
+
+
 
 
 @endsection
-
