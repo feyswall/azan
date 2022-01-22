@@ -6,6 +6,68 @@
                         <div class="row justify-content-start">
                             <div class="col-md-10 col-sm-12">
                                 <div class="card-body">
+
+  <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#productAddSection" aria-expanded="false" aria-controls="productAddSection">
+    <i class="fas fa-trash"></i>
+    deleted Ingridients
+  </button>
+<div class="collapse" id="productAddSection">
+  <div class="card card-body">
+     <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="p-5 mb-4 shadow border-left-success">
+                <div class="row justify-content-start">
+                    <div class="col-md-12 col-sm-12">
+                      <div class="alert alert-light" role="alert">
+                        <span class="lead display-5 text-dark">Record Of Deleted Ingridients</span>
+                      </div>
+                        <table id='deletedIngredients' class="table" style="width: 100%;">
+                          <thead>
+                            <tr>
+                              <th >#</th>
+                              <th >Ingridint name</th>
+                              <th >deleted_on</th>
+                              <th >actin</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+
+                              @foreach( $trashes as $trash )
+                            <tr>
+                              <td>{{ $trash->id }}</th>
+                              <td>{{ $trash->ingridient_name }}</td>
+                              <td>{{ $trash->deleted_at }}</td>
+                              <td>
+                          <button form="restore-{{ $trash->id }}" type="submit" class="btn btn-sm btn-success">
+                           <i class="fas fa-undo-alt"></i>
+                          </button>
+                          <button class="btn btn-sm btn-danger">
+                            <i class="fas fa-trash"></i>
+                          </button>
+                       <form id="restore-{{ $trash->id }}" method="GET" action='ingridient/retrieve/{{ $trash->id }}'>
+                          @csrf
+                          @method('GET')
+                          
+                       </form>
+
+                              </td>
+                            </tr>                                            
+                            
+                              @endforeach
+
+                          </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+
+
                                     <div class="card-body">
                                       <div class="mb-3">
                                         <h3>Ingridients List</h3>
@@ -44,6 +106,7 @@
                                         </table>
                                     </div>
                                 </div>
+
                             </div>
 
                         </div>
@@ -126,13 +189,18 @@
 </script>
      <script>
     $(document).ready(function() {
-        var startTable = function (){
+        $(function (){
             $('#example').DataTable({
                 responsive: true,
                 autoWidth: true
             });
-        }
-        startTable();
+
+             $('#deletedIngredients').DataTable({
+                responsive: true,
+                autoWidth: true
+            });
+
+        });
 });
          </script>
 @endsection

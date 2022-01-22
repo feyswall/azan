@@ -46,6 +46,7 @@
 
         <!-- Nav Item - Utilities Collapse Menu -->
         @can('manage-product')
+    @if( App\Ingridient::all()->count() > 0 )
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                 aria-expanded="true" aria-controls="collapseUtilities">
@@ -59,19 +60,21 @@
                     <a class="collapse-item" href="{{ route('product.index') }}">Backery</a>
                 </div>
             </div>
-        </li>
+        </li>        
+    @endif
 
         @endcan
 
 
 
          <!-- Nav Item - Utilities Collapse Menu -->
+@if( App\Product::all()->count() > 0 && App\Stock::all()->count() > 0 )
          <li class="nav-item">
-
             <a id="sideSale" class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSales"
                 aria-expanded="true" aria-controls="collapseSales">
                 <i class="fas fa-money-bill-wave"></i>
                 <span>Sales</span>
+               
             </a>
             <div id="collapseSales" class="collapse" aria-labelledby="headingUtilities"
                 data-parent="#accordionSidebar">
@@ -85,11 +88,12 @@
                     <a class="collapse-item" id="" href="{{ route('sales.deleted') }}" type="button" >deleted sales</a>
                     @endcan
                 </div>
-
             </div>
         </li>
+@endif
 
 
+    @if( App\Product::all()->count() > 0 )
         <li class="nav-item">
             <a id="sideStoke" class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStoke"
                 aria-expanded="true" aria-controls="collapseStoke">
@@ -108,6 +112,7 @@
 
             </div>
         </li>
+@endif        
 
         <!-- Divider -->
         <hr class="sidebar-divider">

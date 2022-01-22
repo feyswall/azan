@@ -43,8 +43,25 @@
     @endphp
         @foreach( $sales as $sale )
         <tr>
-            <td>{{ $sale->product->product_name }}</td>
-            <td>{{ $sale->product->product_cost }}</td>
+                
+                    @if( !$sale->product )
+                        @php
+                        $product = App\Product::withTrashed()
+                            ->where('id', '=', $sale->product_id )
+                            ->first();
+                         @endphp
+                         <td>
+                            <i class="text-danger fa fa-trash"></i>
+                            {{ $product->product_name }}
+                             <i class="text-danger fa fa-trash"></i>
+                        </td>
+                         <td>{{ $product->product_cost }}</td>   
+                      @else
+                        <td>{{ $product->product_name }}</td>
+                         <td>{{ $sale->product->product_cost }}</td>                           
+                     @endif    
+                
+
             <td>{{ $sale->total_amount }}</td>
             <td>{{ $sale->received_amount }}</td>
             <td>{{ $sale->remain_amount }}</td>

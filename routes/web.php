@@ -22,6 +22,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
+ Route::get('ingridient/retrieve/{id}', 'IngridientsController@retrieve')->name('ingridient.retrieve');
 Route::resource('/ingridient', 'IngridientsController', ['except' => ['update', 'delete']])->middleware('can:edit-ingr');
 
 

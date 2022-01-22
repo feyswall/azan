@@ -36,7 +36,8 @@
 
         <th>paid_cost</th>
         <th>remain_cost</th>
-        <th>who</th>
+        
+        <th>who sold</th>
         <th>action</th>
         <th> date </th>
 
@@ -53,8 +54,9 @@
             <td>{{ $sale->received_amount }}</td>
             <td>{{ $sale->remain_amount }}</td>
             <td>{{ $sale->paid_money }}</td>
-            <td>{{ $sale->remain_money }}</td>
+            
             <td>{{ $sale->who_buys }}</td>
+            <td>{{ $sale->user->name }}</td>
             <td>
 
  <a data-toggle="modal" data-target="#editSellModel-{{ $b }}" num="{{ $sale->id }}" class="btn btn-info btn-sm float-left mr-1"><i class="fas fa-edit"></i></a>

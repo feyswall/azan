@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class IngridientsController extends Controller
 {
+
+
+    public function retrieve(  $id )
+    {
+        $ingridient  = Ingridient::onlyTrashed()->find( $id )->restore();
+        return redirect()->route('ingridient.index');
+        
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,12 +23,19 @@ class IngridientsController extends Controller
      */
     public function index()
     {
+
+        $trashes = Ingridient::select("*")
+            ->onlyTrashed()
+            ->get();
+
+
         $datas = Ingridient::select("*")
             ->where("id", ">", "-2")
             ->orderBy("id", 'desc')
             ->get();
         return view('ingridient.ingridientIndex')
-            ->with('datas', $datas );
+            ->with('datas', $datas )
+            ->with('trashes', $trashes );
     }
 
 
@@ -138,4 +153,6 @@ class IngridientsController extends Controller
     {
         //
     }
+
+
 }

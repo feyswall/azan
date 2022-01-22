@@ -67,11 +67,23 @@
              <tr>
          
                 <td>{{ $stockHist[$b]->id }} </td>
-                <td>
-                    @php 
-                $product = App\product::find( $stockHist[$b]->product_id );
+                    <td>
+                    @if( $stockHist[$b]->product )
+                        @php 
+                        $product = App\product::find( $stockHist[$b]->product_id );
                         echo $product->product_name;
                          @endphp
+                    @else
+                    <i class="text-danger fa fa-trash"></i>
+                        @php
+                        $del_product = App\Product::withTrashed()
+                        ->where('id', '=', $stockHist[$b]->product_id )
+                        ->first();
+                        echo $del_product->product_name; 
+                        @endphp  
+                    <i class="text-danger fa fa-trash"></i>
+                    @endif   
+
                      </td>
                 <td>{{ $stockHist[$b]->amount }}</td>
       

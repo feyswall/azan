@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Ingridient;
 use App\Sale;
 use App\Stock;
@@ -11,6 +12,8 @@ use App\stockTraces;
 
 class Product extends Model
 {
+
+    use SoftDeletes;
 
 
     protected $fillable = [

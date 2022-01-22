@@ -6,12 +6,12 @@
 
 
 @section('page-content')
-<p>
+
   <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#productAddSection" aria-expanded="false" aria-controls="productAddSection">
     <i class="fas fa-plus"></i>
     Add New Product
   </button>
-</p>
+
 <div class="collapse" id="productAddSection">
   <div class="card card-body">
    <div class="row">
@@ -276,28 +276,43 @@
 
       /* selecting the delete button */
       for (let i = 0; i < product_count.length; i++) {
-        let del_btn = $( "#deleteProductButton" + i );
-            console.log( del_btn )
+        let del_btn = $( "#deleteProductButton-" + i );
+
         del_btn.click(function(event) {
           event.preventDefault();
+
           /* selectiong the form to get the path */
           let del_form = $(this).attr("form");
           let del_form_element = $( "#"+del_form );
           let del_form_action = del_form_element.attr('action');
           
-          /* sending the ajax request */
-          $.ajax({
-            url: del_form_action,
-            type: 'delete',
-            dataType: 'json',
-          })
-          .done(function( data ) {
-            console.log( data );
-            product_table()
-          })
-          .fail(function( ) {
-            console.log( "something went wrong" );
-          })
+
+          Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+          if (result.isConfirmed) {
+                       /* sending the ajax request */
+                  $.ajax({
+                    url: del_form_action,
+                    type: 'delete',
+                    dataType: 'json',
+                  })
+                  .done(function( data ) {
+                    console.log( data );
+                    product_table()
+                  })
+                  .fail(function( ) {
+                    console.log( "something went wrong" );
+                  })
+          }
+          });
+  
 
         });
       }

@@ -87,9 +87,7 @@ foreach ( $sales as $sale ){
 
 
     public function deletedSales(){
-       $sales = Sale::onlyTrashed()
-                ->where('id', '>', -2)
-                ->paginate(10);
+       $sales = Sale::onlyTrashed()->select("*")->paginate(10);
          return view('sales.deleted_sales')
          ->with('sales', $sales);
 
