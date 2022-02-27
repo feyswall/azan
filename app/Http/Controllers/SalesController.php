@@ -85,14 +85,13 @@ foreach ( $sales as $sale ){
     }
 
 
-
+//grepper php delete sales
     public function deletedSales(){
        $sales = Sale::onlyTrashed()->select("*")->paginate(10);
          return view('sales.deleted_sales')
          ->with('sales', $sales);
-
     }
-
+//end grepper
 
 
 
